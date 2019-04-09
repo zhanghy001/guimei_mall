@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>我的贵美</title>
+  	<meta charset="UTF-8">
+  	<link rel="stylesheet" type="text/css" href="../EasyUI/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../EasyUI/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../EasyUI/themes/metro/demo.css">
+	<script type="text/javascript" src="../EasyUI/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="../EasyUI/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../EasyUI/easyui-lang-zh_CN.js"></script>
+
+
+
+	<style>
+	.textbox{
+		height:20px;
+		margin:0;
+		padding:0 2px;
+		
+	}
+	</style>
+  </head>
+  <body style="padding:5px; width:980px;height:640px;">
+  	
+  
+	<table id="paging" border="0px" width="100%"  style="text-align:left;">
+			 <tr>
+	   			<td width="50px"><button>首页</button></td>
+	   			<td width="60px"><button>上一页</button></td>
+	   			<td width="100px"><input type="number" min="1" style="width:45px" name="pagenum"><input type="button" value="跳转"></td>
+	   			<td width="60px"><button>下一页</button></td>
+	   			<td width="50px"><button>尾页</button></td>
+	   			<td>
+	   				滑动翻页：<input type="range" min="1">
+	   			</td>
+	   			<td style="text-align:right;">
+	   				显示条数：<input type="number" min="1" step="4" style="width:42px" name="pagesize"  >
+	   			</td>
+	   		</tr>
+	   		<tr>
+	   			<td colspan="5">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="obj.remove();">删除</a>
+	   				<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" style="display:none;" id="save" onclick="obj.save();">保存</a>
+	   			</td>
+	   			<td>
+	   				<input type="text" class="textbox" name="search" style="width:150px">&nbsp;
+	   				<a href="#" class="easyui-linkbutton" iconCls="icon-search" style="height:20px" onclick="obj.search();">查询</a>
+	   			</td>
+	   			<td style="text-align:right;">当前第<b id="pageNum"></b>页，共<b id="totalPage"></b>页</td>
+	   		</tr>
+		</table>
+	<table id="Table"></table>
+	
+
+  </body>
+</html>
