@@ -4,7 +4,7 @@ import cn.guimei_mall.util.ConfigManager;
 
 import java.sql.*;
 
-public class BassDao {
+public class BaseDao {
     private Connection conn ;
     private PreparedStatement ps;
     private ResultSet rs;
