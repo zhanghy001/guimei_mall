@@ -1,7 +1,7 @@
-package cn.guimei_mall.service.serviceImpl;
+package cn.guimei_mall.service.Impl;
 
 import cn.guimei_mall.dao.AnnouncementDao;
-import cn.guimei_mall.dao.daoImpl.AnnouncementDaoImpl;
+import cn.guimei_mall.dao.Impl.AnnouncementDaoImpl;
 import cn.guimei_mall.entity.Announcement;
 import cn.guimei_mall.service.AnnouncementService;
 

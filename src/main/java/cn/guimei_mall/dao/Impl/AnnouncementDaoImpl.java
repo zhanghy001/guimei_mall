@@ -1,17 +1,16 @@
-package cn.guimei_mall.dao.daoImpl;
+package cn.guimei_mall.dao.Impl;
 
 import cn.guimei_mall.dao.AnnouncementDao;
-import cn.guimei_mall.dao.BassDao;
+import cn.guimei_mall.dao.BaseDao;
 import cn.guimei_mall.entity.Announcement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class AnnouncementDaoImpl extends BassDao implements AnnouncementDao {
+public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
     @Override
     public List<Announcement> getAnnounce() {
         List<Announcement> announcementList = new ArrayList<>();
