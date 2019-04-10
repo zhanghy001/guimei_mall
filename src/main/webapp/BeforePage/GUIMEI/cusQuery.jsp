@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -7,6 +8,10 @@
     <%@include file="layUI.jsp"%>
 </head>
 <body>
+
+<%--个人信息--%>
+
+
 <%@include file="head.jsp"%>
 <div style="text-align: center;width: 66%;margin: auto" class="layui-table">
             <table width="60%" >

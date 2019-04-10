@@ -50,7 +50,8 @@
             <h3>没有商家</h3>
         </c:otherwise>
     </c:choose>
+    <script type="text/javascript">
 
-
+    </script>
 </body>
 </html>
