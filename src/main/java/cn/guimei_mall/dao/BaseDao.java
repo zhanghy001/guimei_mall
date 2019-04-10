@@ -4,7 +4,7 @@ import cn.guimei_mall.util.ConfigManager;
 
 import java.sql.*;
 
-public class BassDao {
+public class BaseDao {
     private Connection conn ;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -12,6 +12,8 @@ public class BassDao {
     String url = ConfigManager.getInstance().getValues("url");
     String username = ConfigManager.getInstance().getValues("username");
     String password = ConfigManager.getInstance().getValues("password");
+
+
     // 获取连接
     public boolean getConn(){
         boolean flag = false;
@@ -33,7 +35,7 @@ public class BassDao {
     }
 
     //查询
-    public ResultSet excuteSelect(String sql,Object[] p){
+    public ResultSet excuteSelect(String sql,Object... p){
         if (getConn()) {
             //创建Statement 执行sql
             try {

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -15,8 +16,23 @@
 </head>
 <body>
 <table>
-
+    <p></p>
 </table>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("/NoticeServlet","action=select",callback);
+        function callback(data) {
+            for (var i = 0; i<data.length ; i++) {
+                $("p").append("<tr>" +
+                    "<td>"+data[i].aTitle+"</td>" +
+                    "<td>"+data[i].aText+"</td>" +
+                    "<td>"+data[i].aDate+"</td>"+
+                    "</tr>");
+            }
+        }
+    })
 
+</script>
 </body>
 </html>

@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <title>贵美登录</title>
     <script src="static/js/jquery-2.1.1.min.js"></script>
+    <%--css样式--%>
     <style>
         body{
             margin: 0px;
@@ -68,20 +69,23 @@
             top: -70px;
         }
     </style>
+    <%--登录操作--%>
     <script>
         $(function () {
             var nameSta=false;
             var pwdSta=false;
             $(".core4").click(function () {
                 if($(".core1").val().trim()==""){
-                    $(".lab1").html("账号不完整");
+                    // $(".lab1").html("账号不完整");
+                    alert("账号不完整");
                     nameSta=false;
                 }else {
                     nameSta=true;
                     $(".lab1").html("");
                 }
                 if($(".core2").val().trim()==""){
-                    $(".lab2").html("密码不完整");
+                    // $(".lab2").html("密码不完整");
+                    alert("密码不完整");
                     pwdSta=false;
                 }else {
                     pwdSta=true;
@@ -107,16 +111,16 @@
         })
     </script>
 
-<%--    <script>
+ <script>
         $(function () {
-            var msg="${param.msg}"
+            var msg="${param.msg}";
             if(msg.length>0){
                 if(msg=="1"){
-                    $("#err1").html("输入的账号或密码错误").css("color","red");
+                    $("#err1").html("登录失败").css("color","red");
                 }
             }
         })
-    </script>--%>
+    </script>
 
 </head>
 <body>
@@ -135,7 +139,9 @@
             <input type="image" src="img/login-botton.PNG" class="core4" />
         </div>
 
-    </form><label class="lab1"></label><div><label class="lab2"></label></div>
+    </form>     <label class="lab1"></label>
+           <div><label class="lab2"></label></div>
+                <label id="err1"></label>
 </div>
 </body>
 </html>
