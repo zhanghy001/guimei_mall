@@ -62,9 +62,10 @@
     </div>
     <div id="welcome">
 
-        <label><b id="loginName"></b>您好，欢迎您光临贵美商城！</label><label id="shijian"></label><b id="out"><a id="outPage" href="doCus?action=out"  ><b>退出</b></a>
+        <label><b id="loginName"></b>您好，欢迎您光临贵美商城！</label>
+        <label id="shijian"></label><b id="out"><b id="outPage" href="doCus?action=out"  ><b>退出</b></b></b></a>
     </div>
-    <div style="position: relative;top: -10px;">
+    <div style="position: relative;top: 10px;">
             <div class="head_dh_tap">首页</div>
             <div class="head_dh_tap" >家用电器</div>
         	<div class="head_dh_tap" >手机数码</div>
@@ -73,8 +74,7 @@
             <div class="head_dh_tap">帮助中心</div>
             <div class="head_dh_tap">免费开店</div>
             <div class="head_dh_tap">全球咨询</div>
-
-    </b></div>
+  </div>
 </div>
 </body>
 </html>
