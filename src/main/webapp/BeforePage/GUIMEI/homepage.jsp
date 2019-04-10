@@ -13,7 +13,7 @@
         $(function () {
             $.ajax({
                 url:"doSmall",
-            data:"action=smallQueryByBigId&bigId=1",
+                data:"action=smallQueryByBigId&bigId=1",
                 type:"post",
                 dataType:"json",
                 success:function (list) {
@@ -55,6 +55,11 @@
                     })
                 }
             })
+
+
+
+
+
         })
     </script>
 </head>
@@ -101,7 +106,8 @@
 
         <div id="body_3">
          	<div	id="announ" style="width:210px;margin-top:44px;margin:50px 0 65px 10px;">
-                <iframe style="width: 100%; height: 100%;border: 0px"   src="doAn?action=anQueryNew"  ></iframe>
+                <%--src="doAn?action=anQueryNew"--%>
+                <iframe style="width: 100%; height: 100%;border: 0px"   src="BeforePage/GUIMEI/anQuery.jsp"  ></iframe>
             </div>
             <div class="b3dx" >
                 <iframe style="width: 100%; height: 100%;border: 0px"   src="doGoods?action=goodsQueryNew"  ></iframe>
