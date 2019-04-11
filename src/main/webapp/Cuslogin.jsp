@@ -46,11 +46,11 @@
 			   return false;
 			}
 		});
-
-		var flag='${param.flag}';
-		if(flag=="false"){
+        var isLoginSuccessful='${param.isLoginSuccessful}';
+		if(isLoginSuccessful=="false"){
 		    alert("输入的账号或密码错误");
         }
+
 	});
 		
 
