@@ -1,6 +1,6 @@
-package cn.guimei_mall.dao.impl;
+package cn.guimei_mall.dao.Impl;
 
-import cn.guimei_mall.dao.BassDao;
+import cn.guimei_mall.dao.BaseDao;
 import cn.guimei_mall.dao.SellerDao;
 import cn.guimei_mall.entity.Seller;
 
@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SellerDaoimpl extends BassDao implements SellerDao {
+public class SellerDaoimpl extends BaseDao implements SellerDao {
 
     @Override
     public List<Seller> getList() {

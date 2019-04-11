@@ -21,16 +21,16 @@
 <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
     $(function () {
-        $.getJSON("/NoticeServlet","action=select",callback);
+        var id = 1;
+        $.getJSON("/NoticeServlet","action=selectid&id="+id,callback);
         function callback(data) {
-            for (var i = 0; i<data.length ; i++) {
                 $("p").append("<tr>" +
-                    "<td>"+data[i].aTitle+"</td>" +
-                    "<td>"+data[i].aText+"</td>" +
-                    "<td>"+data[i].aDate+"</td>"+
+                    "<td>"+data.aTitle+"</td>" +"<br>"+
+                    "<td>"+data.aText+"</td>" +"u<br>"+
+                    "<td>"+data.aDate+"</td>"+
                     "</tr>");
             }
-        }
+
     })
 
 </script>
