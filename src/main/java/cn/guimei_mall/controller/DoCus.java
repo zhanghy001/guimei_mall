@@ -3,6 +3,8 @@ package cn.guimei_mall.controller;
 
 import cn.guimei_mall.dao.BaseDao;
 import cn.guimei_mall.entity.Customer;
+import cn.guimei_mall.entity.Goods;
+import cn.guimei_mall.entity.Orderse;
 import cn.guimei_mall.service.customerService.CustomerLogin;
 import cn.guimei_mall.util.StringToDate;
 import org.apache.commons.fileupload.FileItem;
@@ -25,19 +27,20 @@ import java.util.Iterator;
 @WebServlet(name = "DoCus",urlPatterns = "/doCus")
 public class DoCus extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String string=request.getParameter("action");
-        if(string==null){
+        String action=request.getParameter("action");
+        if(action==null){
             response.setStatus(404);
             return;
         }
-        switch (string){
+        switch (action){
             case "cusLogin":{
                 CustomerLogin customerLogin=new CustomerLogin();
                 customerLogin.setCusLoginNme(request.getParameter("cusLoginName"));
                 customerLogin.setCusPassword(request.getParameter("cusPassword"));
                 Customer customer=customerLogin.ifCustomerLogin();
                 if(customer==null){
-                    request.getRequestDispatcher("/Cuslogin.jsp?flag=false").forward(request,response);
+                    request.getRequestDispatcher("/Cuslogin.jsp?isLoginSuccessful=false").forward(request,response);
+                    return;
                 }else{
                     HttpSession httpSession=request.getSession();
                     httpSession.setAttribute("customer",customer);
@@ -64,7 +67,6 @@ public class DoCus extends HttpServlet {
                             if (item.isFormField()) {
                                 String name = item.getFieldName();
                                 String itemString = item.getString("utf-8");
-                                System.out.println(itemString);
                                 switch (name) {
                                     case "C_name": {
                                         customer.setCusName(itemString);
@@ -87,9 +89,7 @@ public class DoCus extends HttpServlet {
                                         break;
                                     }
                                     case "C_hobby": {
-                                        System.out.println("hobby前");
-                                        customer.setCusHobby(hobby.append(itemString).toString());
-                                        System.out.println("hobby后");
+                                        customer.setCusHobby(hobby.append(itemString).append(",").toString());
                                         break;
                                     }
                                     case "C_birthday": {
@@ -107,7 +107,7 @@ public class DoCus extends HttpServlet {
                                 File file = new File(fileString);
                                 File dir=new File(request.getServletContext().getRealPath("/upload/img/customerImg"));
                                 if(!dir.exists()){
-                                    dir.mkdir();
+                                    dir.mkdirs();
                                 }
                                 if(!file.exists()){
                                     file.createNewFile();
@@ -134,12 +134,32 @@ public class DoCus extends HttpServlet {
                 objects[6]=customer.getCusHobby();
                 objects[7]=customer.getCusCode();
                 objects[8]=customer.getCusBirthday();
-                baseDao.excutUpdateRows(updateSql,objects);
+                int isAddtrue=baseDao.excutUpdateRows(updateSql,objects);
+                if(isAddtrue==0){
+                    request.getRequestDispatcher("/register.jsp?isAddTrue=false").forward(request,response);
+                    return;
+                }
+                response.sendRedirect("/Cuslogin.jsp");
+                break;
             }
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws IOException{
        // System.out.println(request.getServletContext().getRealPath("/src/main/java/resources/img/customerImg/"));
+        String action=request.getParameter("action");
+
+        switch (action){
+            case "out":{
+                request.getSession().removeAttribute("customer");
+                response.sendRedirect("/BeforePage/GUIMEI/homepage.jsp");
+                break;
+            }
+            case "QueryById":{
+                response.sendRedirect("/Customer/GUIMEI/customerInfomation.jsp");
+                break;
+            }
+        }
     }
+
 }
