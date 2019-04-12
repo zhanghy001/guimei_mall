@@ -1,6 +1,11 @@
 package cn.guimei_mall.entity;
 
+/**
+ *  商品
+ *  zhy
+ */
 public class Goods {
+    // id
     long id;
     String goodsName;
     long goodsSmallId;

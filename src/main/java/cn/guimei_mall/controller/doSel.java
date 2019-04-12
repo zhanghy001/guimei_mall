@@ -1,8 +1,9 @@
 package cn.guimei_mall.controller;
 
 import cn.guimei_mall.entity.Seller;
+import cn.guimei_mall.service.Impl.SellerServiceimpl;
 import cn.guimei_mall.service.SellerService;
-import cn.guimei_mall.service.impl.SellerServiceimpl;
+
 import cn.guimei_mall.util.PageSupport;
 import com.alibaba.fastjson.JSON;
 
