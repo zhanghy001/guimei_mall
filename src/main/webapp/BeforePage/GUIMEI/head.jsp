@@ -29,7 +29,7 @@
         </div>
         <div class="login_a">
             <div class="login_b" style="background-position:-44PX 0 "></div>
-            <a href="/Customer/GUIMEI/ordersInformation.jsp" class="a_login">订单</a>
+            <a href="doOrder?action=init" class="a_login">订单</a>
         </div>
         <div class="login_a">
             <div class="login_b" style="background-position:-89PX 0 "></div>
