@@ -46,6 +46,11 @@
 			   return false;
 			}
 		});
+        var isLoginSuccessful='${param.isLoginSuccessful}';
+		if(isLoginSuccessful=="false"){
+		    alert("输入的账号或密码错误");
+        }
+
 	});
 		
 
@@ -57,7 +62,7 @@
 <div id="login_1">
     <div id="login_left_d">
         <img src="images/img/login/logintitle.gif">
-        <form action="../doCus?action=cusLogin" method="post"  ><!-- 表单按钮控制 -->
+        <form action="/doCus?action=cusLogin" method="post"  ><!-- 表单按钮控制 -->
             <div style="color: red">${login}</div>
             <table id="login_left_table" >
                 <tr>

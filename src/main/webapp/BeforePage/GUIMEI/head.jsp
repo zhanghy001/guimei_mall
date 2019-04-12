@@ -25,33 +25,33 @@
     <div id="login">
         <div class="login_a" style="margin-left: 12px;width: 80px">
             <div class="login_b" style="background-position:-3PX 0 "></div>
-            <a href="doShop?action=shopQuery&pageNumber=1&cusId=${Cus.id}" class="a_login">购物车</a>
+            <a href="doShop?action=shopQuery&pageNumber=1&cusId=${customer.id}" class="a_login">购物车</a>
         </div>
         <div class="login_a">
             <div class="login_b" style="background-position:-44PX 0 "></div>
-            <a href="doOrd?action=ordQuery&pageNumber=1&scCusId=${Cus.id}" class="a_login">订单</a>
+            <a href="/Customer/GUIMEI/ordersInformation.jsp" class="a_login">订单</a>
         </div>
         <div class="login_a">
             <div class="login_b" style="background-position:-89PX 0 "></div>
-            <a class="a_login" href="doCus?action=QueryById&id=${Cus.id}">个人信息</a>
+            <a class="a_login" href="doCus?action=QueryById&id=${customer.id}">个人信息</a>
         </div>
         <div class="login_a">
             <div class="login_b" style="background-position:-130PX 0 "></div>
-            <a href="doShop?action=shopQueryOld&pageNumber=1&cusId=${Cus.id}" class="a_login">购物记录</a>
+            <a href="doShop?action=shopQueryOld&pageNumber=1&cusId=${customer.id}" class="a_login">购物记录</a>
         </div>
         <div class="login_a" style="width: 100px;margin-left: 5px">
-            <a href="doCus?action=out" target="body_i">
+            <a href="Cuslogin.jsp" target="body_i">
                 <div id="login_d">登录</div>
             </a>
-            <a href="doCus?action=out" target="body_i">
+            <a href="Cuslogin.jsp" target="body_i">
                 <div id="login_z">注册</div>
             </a>
         </div>
 
     </div>
     <div id="welcome">
-        <b id="loginName"></b>您好，欢迎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="CusImage/${Cus.cusPhoto}" class="layui-nav-img">
-            ${Cus.cusName}登录贵美商城！<b id="shijian"></b><b id="out"><a id="outPage" href="doCus?action=out"  ><b>退出</b></a>
+        <b id="loginName"></b>您好，欢迎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="CusImage/${customer.cusPhoto}" class="layui-nav-img">
+            ${customer.cusName}登录贵美商城！<b id="shijian"></b><b id="out"><a id="outPage" href="doCus?action=out"  ><b id="exit">退出</b></a>
     </div>
    <form action="doGoods?action=goodsCusQueryLike&pageNumber=1" method="post">
        <div id="search" style="width:230px;height:30px;float:right;margin:11px 8px 0 0;">

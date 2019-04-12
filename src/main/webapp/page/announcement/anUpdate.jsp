@@ -17,13 +17,62 @@
 </head>
 
 <body>
-    <form action="doAn?action=anUpdate" method="post">
+    <form action="" method="post">
         <div id="d1"></div>
-        ID<input type="text" value="${An.id}" name="id" readonly>
-        标题<input type="text" value="${An.ATitle}" name="aTitle" id="aTitle">
-        内容<input type="text" value="${An.AText}" name="aText">
-        日期<input type="date" value="${An.ADate}" name="aDate"><br>
-        <input type="submit" value="修改完成" class="layui-btn" id="sub">
+        ID<input type="text" value="" name="id" id="id" readonly>
+        标题<input type="text" value="" name="aTitle" id="aTitle">
+        内容<input type="text" value="" name="aText" id="aText">
+        日期<input type="date" value="" name="aDate" id="aDate"><br>
+        <input type="button" value="修改完成" class="layui-btn" id="sub" onclick="update()">
     </form>
+    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+    <script type="text/javascript">
+        /**
+         * 获取数据
+         */
+        $(function () {
+            var id = '${param.id}';
+            $.getJSON("/NoticeServlet","action=updateid&id="+id,callback);
+            function callback(data) {
+                $("#aDate").val(data.aDate);
+                $("#aTitle").val(data.aTitle);
+                $("#aText").val(data.aText);
+                $("#id").val(data.id);
+
+            }
+        });
+        /**
+         * 修改
+         */
+        function update() {
+            var atitle = $("#aTitle").val();
+            if (atitle == "" || atitle == undefined){
+                alert("标题不能为空");
+                return;
+            }
+            var aText = $("#aText").val();
+            if (aText == "" || aText == undefined){
+                alert("内容不能为空");
+                return;
+            }
+            var aDate = $("#aDate").val();
+            if (aDate == "" || aDate == undefined){
+                alert("标题不能为空");
+                return;
+            }
+            var paramArray = $("form").serializeArray(); //序列化为json数组
+            var queryString = $.param(paramArray);//将数组序列化为字符串
+            $.getJSON("/NoticeServlet?action=update",queryString,callback);
+            function callback(data) {
+                if (data.flag == "true"){
+                    alert("修改成功")
+                    location.href = "/page/announcement/anQuery.jsp";
+                }else {
+                    alert("修改失败")
+                }
+            }
+
+        }
+    </script>
 </body>
 </html>

@@ -1,7 +1,10 @@
 package cn.guimei_mall.entity;
 
 import java.util.Date;
-
+/**
+ * 公告
+ * Hao
+ */
 public class Announcement {
     /**
      * 编号

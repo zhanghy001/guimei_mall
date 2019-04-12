@@ -56,7 +56,14 @@
                 }
             })
 
+        var customer="${customer}";
+        if(customer!=""){
+            $("#login_d").hide();
+            }else {
+            $("#exit").hide();
+            $(".a_login").hide();
 
+        }
 
 
 
