@@ -125,7 +125,7 @@
 </head>
 <body>
 <div class="main">
-    <form class="move" method="post" >
+    <form class="move" method="post">
         <%--<div><a href="Cuslogin.jsp">顾客</a></div>--%>
         <div style="color: red">${login}</div>
         <div><img src="img/login2.PNG" alt="" ></div>

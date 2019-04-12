@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <form action="doSel?action=selAdd" method="post">
+    <form action="" method="post">
         <div id="d1"></div>
         姓名<input type="text"  name="sellerName" id="sellerName">
         登录账号<input type="text"  name="sellerUser">
@@ -30,7 +30,21 @@
         Email<input type="text"  name="sellerEmail"><br>
         电话<input type="text"  name="sellerTel">
         地址<input type="text"  name="sellerAddress">
-        <input type="submit" value="添加" class="layui-btn" id="sub">
+        <button type="submit" class="page-btn" name="save" onclick="saveNews()">保存</button>
     </form>
+    <script type="text/javascript">
+        function saveNews() {
+        var queryString=$("form").serialize();
+        $.getJSON("/doSel?action=selAdd",queryString,callback);
+            alert("增加成功!");
+       /* function callback(data) {
+            if (data.flag == "true") {
+                alert("增加成功!");
+            } else {
+                alert("增加失败!")
+            }
+        }*/
+        }
+    </script>
 </body>
 </html>
