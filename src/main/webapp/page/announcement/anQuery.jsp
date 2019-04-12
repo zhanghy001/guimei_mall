@@ -76,8 +76,8 @@
                         "<td>"+data.list[i].aTitle+"</td>" +
                         "<td>"+data.list[i].aText+"</td>" +
                         "<td>"+data.list[i].aDate+"</td>"+
-                        " <th ><a href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +
-                        " <a href=\"javascript:void(0)\" onclick='dele("+data.list[i].id+",this)'>删除</a>" +
+                        " <th ><a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +
+                        " <a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='dele("+data.list[i].id+",this)'>删除</a>" +
                         "</th>"+
                         "</tr>");
                 }

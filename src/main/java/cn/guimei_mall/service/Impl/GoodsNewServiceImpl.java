@@ -7,6 +7,9 @@ import cn.guimei_mall.service.GoodsNewService;
 
 import java.util.List;
 
+/**
+ * 朱豪
+ */
 public class GoodsNewServiceImpl implements GoodsNewService {
     GoodsNewDao goodsNewDao = null;
     public GoodsNewServiceImpl() {
@@ -14,13 +17,28 @@ public class GoodsNewServiceImpl implements GoodsNewService {
     }
 
     @Override
-    public List<GoodsNew> getGoods(int pageCurrentNo, int pageSize) {
-        return goodsNewDao.getGoods(pageCurrentNo,pageSize);
+    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize) {
+        return goodsNewDao.getGoods(goodName,goodSeId,goodSmalId,pageCurrentNo,pageSize);
     }
 
     @Override
     public GoodsNew getIdGoods(int id) {
         return goodsNewDao.getIdGoods(id);
+    }
+
+    @Override
+    public List<GoodsNew> getSellerName() {
+        return goodsNewDao.getSellerName();
+    }
+
+    @Override
+    public List<GoodsNew> getSmallName() {
+        return goodsNewDao.getSmallName();
+    }
+
+    @Override
+    public List<GoodsNew> getDiscount() {
+        return goodsNewDao.getDiscount();
     }
 
     @Override

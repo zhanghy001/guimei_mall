@@ -8,11 +8,23 @@ public interface GoodsNewService {
     /**
      * 查询全部
      */
-    List<GoodsNew> getGoods(int pageCurrentNo, int pageSize);
+    List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize);
     /**
      * 根据id查询
      */
     GoodsNew getIdGoods(int id);
+    /**
+     * 查询商家名字
+     */
+    List<GoodsNew> getSellerName();
+    /**
+     * 查询小分类名
+     */
+    List<GoodsNew> getSmallName();
+    /**
+     *  折扣
+     */
+    List<GoodsNew> getDiscount();
     /**
      * 修改、
      */

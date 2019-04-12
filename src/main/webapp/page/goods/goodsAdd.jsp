@@ -9,10 +9,11 @@
 
 </head>
 <body>
-<form action="doGoods?action=goodsAdd" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">
     <di id="d1"></di>
     商品名称<input type="text"  name="goodsName" id="goodsName">
     小分类名称<select name="goodsSmalId" id="goodsSmalId">
+    <option value="-1">全部</option>
     </select>
     商品的价格<input type="text"  name="goodsMoney" >
     商品的数量<input type="text" name="goodsNumber" >
@@ -23,10 +24,84 @@
     <option value="${1}">二手</option>
 </select>
     商家名称<select name="goodsSeId" id="goodsSeId">
+    <option value="-1">全部</option>
 </select>
     商品的折扣<select name="goodsDiscId" id="goodsDiscId">
+    <option value="-1">全部</option>
 </select>
-    <input type="submit" value="添加" class="layui-btn" id="sub"  disabled="true">
+    <input type="button" value="添加" class="layui-btn" id="sub"  disabled="true" onclick="addGoods()">
 </form>
+<script type="text/javascript" src=""></script>
+<script type="text/javascript">
+    $(function () {
+        getSellerName();
+        getsmall();
+        getDiscRate();
+    });
+    function addGoods(){
+        // var atitle = $("#aTitle").val();
+        // if (atitle == "" || atitle == undefined){
+        //     alert("标题不能为空");
+        //     return;
+        // }
+        // var aText = $("#aText").val();
+        // if (aText == "" || aText == undefined){
+        //     alert("内容不能为空");
+        //     return;
+        // }
+        // var aDate = $("#aDate").val();
+        // if (aDate == "" || aDate == undefined){
+        //     alert("标题不能为空");
+        //     return;
+        // }
+        var paramArray = $("form").serializeArray(); //序列化为json数组
+        var queryString = $.param(paramArray);//将数组序列化为字符串
+        $.getJSON("/GoodsNewServlet?action=add",queryString,callback);
+        function callback(data) {
+            if (data.flag == "true"){
+                alert("添加成功")
+                $("#aTitle").val("");
+                $("#aText").val("");
+                $("#aDate").val("");
+            }else {
+                alert("添加失败")
+            }
+        }
+    }
+    /**
+     * 商家名下拉框
+     */
+    function getSellerName() {
+        $.getJSON("/GoodsNewServlet",{"action":"selectSell"},callback);
+        function callback(data) {
+            $(data).each(function () {
+                $("#goodsSeId").append("<option value=" + this.id + ">" + this.goodsSeName + "</option>");
+            })
+        }
+    }
+    /**
+     * 小分类下拉框
+     */
+    function getsmall() {
+        $.getJSON("/GoodsNewServlet",{"action":"selectsmall"},callback);
+        function callback(data) {
+            $(data).each(function () {
+                $("#goodsSmalId").append("<option value=" + this.id + ">" + this.goodsSmallName + "</option>");
+            })
+        }
+    }
+    /**
+     *  折扣下拉框
+     * selectDiscRate
+     */
+    function getDiscRate() {
+        $.getJSON("/GoodsNewServlet",{"action":"selectDiscRate"},callback);
+        function callback(data) {
+            $(data).each(function () {
+                $("#goodsDiscId").append("<option value=" + this.id + ">" + this.goodsDiscRate + "</option>");
+            })
+        }
+    }
+</script>
 </body>
 </html>
