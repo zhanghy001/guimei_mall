@@ -1,4 +1,4 @@
-package cn.guimei_mall.dao.impl;
+package cn.guimei_mall.dao.Impl;
 
 import cn.guimei_mall.dao.BaseDao;
 import cn.guimei_mall.dao.SellerDao;

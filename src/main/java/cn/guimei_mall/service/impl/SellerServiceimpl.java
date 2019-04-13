@@ -1,7 +1,8 @@
-package cn.guimei_mall.service.impl;
+package cn.guimei_mall.service.Impl;
 
+import cn.guimei_mall.dao.Impl.SellerDaoimpl;
 import cn.guimei_mall.dao.SellerDao;
-import cn.guimei_mall.dao.impl.SellerDaoimpl;
+
 import cn.guimei_mall.entity.Seller;
 import cn.guimei_mall.service.SellerService;
 

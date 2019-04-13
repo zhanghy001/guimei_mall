@@ -6,7 +6,10 @@ import cn.guimei_mall.entity.Announcement;
 import cn.guimei_mall.service.AnnouncementService;
 
 import java.util.List;
-
+/**
+ * 公告
+ * Hao
+ */
 public class AnnouncementServiceImpl implements AnnouncementService{
     AnnouncementDao announce =null;
     public AnnouncementServiceImpl() {
@@ -14,8 +17,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     }
 
     @Override
-    public List<Announcement> getAnnounce() {
-        return announce.getAnnounce();
+    public List<Announcement> getAnnounce(int pageCurrentNo,int pageSize) {
+        return announce.getAnnounce(pageCurrentNo,pageSize);
     }
 
     @Override
@@ -36,5 +39,10 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     @Override
     public int addAnn(Announcement ann) {
         return announce.addAnn(ann);
+    }
+
+    @Override
+    public int getTotalCount() {
+        return announce.getTotalCount();
     }
 }

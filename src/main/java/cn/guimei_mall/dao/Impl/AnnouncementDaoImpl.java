@@ -9,18 +9,23 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 公告
+ * Hao
+ */
 public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
     @Override
-    public List<Announcement> getAnnounce() {
+    public List<Announcement> getAnnounce(int pageCurrentNo,int pageSize) {
         List<Announcement> announcementList = new ArrayList<>();
         try {
             // 获取连接
             this.getConn();
             //返回结果
-            Object[] p = {};
-            String sql = "select * from announcement";
-            ResultSet rs = this.excuteSelect(sql);
+
+            StringBuffer sql = new StringBuffer("select * from announcement");
+            sql.append(" limit ?,?");
+            Object[] p = {(pageCurrentNo-1)*pageSize,pageSize};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
 
             while (rs.next()){
                 Announcement ann = new Announcement();
@@ -145,6 +150,31 @@ public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
             closeConn();
         }
         return ire;
+    }
+
+    @Override
+    public int getTotalCount() {
+        int totalCount = 0;
+        try {
+            // 加载驱动
+            this.getConn();
+            //创建Statement 执行sql
+            StringBuffer sql = new StringBuffer("select count(*) from announcement ");
+
+            Object[] p = {};
+            ResultSet rs= this.excuteSelect(sql.toString(),p);
+
+            //返回结果
+            while (rs.next()){
+                totalCount = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+
+        }
+        return totalCount;
     }
 
 
