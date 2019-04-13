@@ -107,7 +107,21 @@
 </select>
     商品的折扣<select name="goodsDiscId" id="goodsDiscId">
 </select>
-    <input type="submit" value="添加" class="layui-btn" id="sub"  disabled="true">
+    <button type="submit" class="page-btn" name="save" onclick="saveNews()">添加</button>
 </form>
+<script type="text/javascript">
+    function saveNews() {
+        var queryString=$("form").serialize();
+        $.getJSON("/doSel?action=selAdd",queryString,callback);
+        alert("添加成功!");
+        /* function callback(data) {
+             if (data.flag == "true") {
+                 alert("增加成功!");
+             } else {
+                 alert("增加失败!")
+             }
+         }*/
+    }
+</script>
 </body>
 </html>

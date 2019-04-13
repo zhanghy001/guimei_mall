@@ -78,7 +78,6 @@
 
 
     function select(pageNo) {
-
         pageCurrentNo=pageNo;
 
         $.getJSON("/doSel",{"action":"select","pageSize":pageSize,"pageCurrentNo":pageCurrentNo},callback)
@@ -120,25 +119,6 @@
             $("#pageNo").html(data.pageCurrentNo);
             $("#totalPages").html(data.totalPages);
             totalPages=parseInt($("#totalPages").html());
-        }
-    }
-    //显示隐藏
-    function showhide(currentPage,totalPages) {
-        if(currentPage==1){
-            $("#prev").hide();
-            $("#next").show();
-        }
-        if(currentPage>1&&currentPage<totalPages){
-            $("#prev").show();
-            $("#next").show();
-        }
-        if(currentPage==totalPages){
-            $("#prev").show();
-            $("#next").hide();
-        }
-        if(totalPages==1){
-            $("#prev").hide();
-            $("#next").hide();
         }
     }
     function deleteNews(id,btn) {

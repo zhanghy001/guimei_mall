@@ -238,7 +238,7 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
                 sql.append(" and selleruser=\'" + selleruser + "\'");//加引号
             }
             sql.append(" limit ?,?");
-            Object[] params = {(pageCurrentNo - 1) * pageSize, pageSize};
+            Object[] params = {pageCurrentNo, pageSize};
             ResultSet rs = this.excuteSelect(sql.toString(), params);
             try {
                 while (rs.next()) {
@@ -286,7 +286,7 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
         if (getConn()) {
             try {
                 //创建statument执行sql
-                StringBuffer sql = new StringBuffer("select * from `seller` where 1=1 ");
+                StringBuffer sql = new StringBuffer("select COUNT(*) from `seller` where 1=1 ");
                 if (sId != 0) {
                     sql.append(" and sId=" + sId);
                 }

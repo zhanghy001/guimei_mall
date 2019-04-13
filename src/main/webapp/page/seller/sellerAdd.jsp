@@ -36,15 +36,15 @@
         function saveNews() {
         var queryString=$("form").serialize();
         $.getJSON("/doSel?action=selAdd",queryString,callback);
-            alert("增加成功!");
-       /* function callback(data) {
-            if (data.flag == "true") {
-                alert("增加成功!");
-            } else {
-                alert("增加失败!")
-            }
-        }*/
-        }
+
+       function callback(data) {
+           if (data.flag == "true") {
+               alert("增加成功!");
+           } else {
+               alert("增加失败!")
+           }
+       }
+  }
     </script>
 </body>
 </html>
