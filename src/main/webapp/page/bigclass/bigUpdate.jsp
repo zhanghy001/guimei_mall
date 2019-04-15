@@ -18,7 +18,24 @@
         大分类ID<input type="text" value="${Big.id}" name="id" readonly>
         大分类名称<input type="text" value="${Big.bigName}" name="bigName" >
         大分类描述<input type="text" value="${Big.bigText}" name="bigText" >
-        <input type="submit" value="修改完成" class="layui-btn">
+        <input type="submit" value="修改完成" class="layui-btn"><br/>
+        <label id="err1"></label>
     </form>
 </body>
+
+<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var msg="${param.msg}";
+        if(msg.length>0){
+            if(msg=="0"){
+                $("#err1").html("修改成功").css("color","red");
+            }else {
+                $("#err1").html("修改失败").css("color","red");
+            }
+        }
+    })
+</script>
+
+
 </html>

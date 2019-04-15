@@ -26,4 +26,9 @@
     <input type="submit" value="添加" class="layui-btn" id="sub"  >
 </form>
 </body>
+<script type="text/javascript">
+
+    $("#smallBigId").load("doSmall?action=getBigName&id=-1");
+
+</script>
 </html>

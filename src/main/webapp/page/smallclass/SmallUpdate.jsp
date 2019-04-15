@@ -14,10 +14,16 @@
     小分类ID<input type="text" value="${Small.id}" name="id" readonly>
     小分类名称<input type="text" value="${Small.smallName}" name="smallName" id="smallName">
     大分类名称<select name="smallBigId" id="smallBigId">
-        <option value="${Small.bigclass.id}">${Small.bigclass.bigName}</option>
+
     </select>
     小分类描述<input type="text" value="${Small.smallText}" name="smallText" >
     <input type="submit" value="修改完成" class="layui-btn" id="sub"  >
 </form>
 </body>
+<script type="text/javascript">
+
+    $("#smallBigId").load("doSmall?action=getBigName&id=0");
+
+
+</script>
 </html>
