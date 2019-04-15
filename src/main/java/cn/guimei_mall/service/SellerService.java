@@ -15,6 +15,6 @@ public interface SellerService {
     int updateseller(Seller seller);
     //增加新闻信息
     int addseller(Seller seller);
-    List<Seller> getNewsListBy(int sId,String selleruser,int pageCurrentNo,int pageSize);
+    List<Seller> getNewsListBy(int sId,String selleruser,int pageCurrentNo,int pagesize);
     int getTotalCount(int sid,String selleruser);
 }

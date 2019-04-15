@@ -33,12 +33,12 @@ public class NoticeServlet extends HttpServlet {
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
         if ("select".equals(action)){
-            int pageCurrenNo = Integer.parseInt(request.getParameter("pageCurrenNo"));
-            int pageSize =  Integer.parseInt(request.getParameter("pageSize"));
-            List<Announcement> list = announ.getAnnounce(pageCurrenNo,pageSize);
+            int pageCurrentNo = Integer.parseInt(request.getParameter("pageCurrentNo"));
+            int pagesize =  Integer.parseInt(request.getParameter("pagesize"));
+            List<Announcement> list = announ.getAnnounce(pageCurrentNo,pagesize);
             PageSupport pageSupport = new PageSupport();
-            pageSupport.setPagesize(pageSize);
-            pageSupport.setPageCurrentNo(pageCurrenNo);
+            pageSupport.setpagesize(pagesize);
+            pageSupport.setPageCurrentNo(pageCurrentNo);
             pageSupport.setTotalCount(announ.getTotalCount());
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             pageSupport.setList(list);

@@ -32,7 +32,7 @@ public interface SuperUserService {
     //根据id查询大分类
     BigClass getBigClassById(int id);
 
-    //根据id修改分类
+    //根据id修改大分类
     boolean updateBigById(int id,String bigName,String bigText);
 
     //添加大分类
@@ -46,6 +46,18 @@ public interface SuperUserService {
 
     //得到小分类条数
     int getSmallCount(String smallName,int smallBigId);
+
+    //添加小分类
+    boolean creatSmall(String smallName,int smallBigId,String smallText);
+
+    //删除小分类
+    boolean deleteSmall(int id);
+
+    //根据id查询小分类
+    SmallClass getSmallClassById(int id);
+
+    //根据id修改小分类
+    boolean updateSmallById(int id,String smallName,int smallBigId,String smallText);
 
 
 }

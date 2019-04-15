@@ -17,8 +17,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     }
 
     @Override
-    public List<Announcement> getAnnounce(int pageCurrentNo,int pageSize) {
-        return announce.getAnnounce(pageCurrentNo,pageSize);
+    public List<Announcement> getAnnounce(int pageCurrentNo,int pagesize) {
+        return announce.getAnnounce(pageCurrentNo,pagesize);
     }
 
     @Override

@@ -189,7 +189,7 @@ public class SuperUserDaoImpl extends BaseDao implements SuperUserDao  {
         return bIgClass;
     }
 
-    @Override  //根据id修改分类
+    @Override  //根据id修改da分类
     public boolean updateBigById(int id,String bigName,String bigText) {
         boolean flag=false;
         try {
@@ -306,6 +306,82 @@ public class SuperUserDaoImpl extends BaseDao implements SuperUserDao  {
             this.closeConn();
         }
         return count;
+    }
+
+    @Override    //添加小分类
+    public boolean creatSmall(String smallName, int smallBigId, String smallText) {
+        boolean flag=false;
+        try {
+            String sql="INSERT INTO `guimei`.`smallclass` (`smallName`, `smallBigId`, `smallText`) VALUES (?,?,?)";
+            Object[] params={smallName,smallBigId,smallText};
+            int res=this.excutUpdateRows(sql,params);
+            if (res>0){
+                flag=true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            this.closeConn();
+        }
+        return flag ;
+    }
+
+    @Override    //删除小分类
+    public boolean deleteSmall(int id) {
+        boolean flag=false;
+        try {
+            String sql="DELETE FROM `guimei`.`smallclass` WHERE `id` ="+id;
+            Object[] params={};
+            int res=this.excutUpdateRows(sql,params);
+            if (res>0){
+                flag=true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            this.closeConn();
+        }
+        return flag ;
+    }
+
+    @Override   //根据id查询小分类
+    public SmallClass getSmallClassById(int id) {
+       SmallClass smallClass=new SmallClass();
+        try {
+            String sql="SELECT * FROM `smallclass` WHERE id="+id;
+            Object[] params={};
+            ResultSet rs=this.excuteSelect(sql,params);
+            while (rs.next()){
+                smallClass.setId(rs.getInt("id"));
+                smallClass.setSmallName(rs.getString("smallName"));
+                smallClass.setSmallBigId(rs.getInt("smallBigId"));
+                smallClass.setSmallText(rs.getString("smallText"));
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.closeConn();
+        }
+        return smallClass;
+    }
+
+    @Override //根据id修改小分类
+    public boolean updateSmallById(int id, String smallName, int smallBigId, String smallText) {
+        boolean flag=false;
+        try {
+            String sql=" UPDATE `guimei`.`smallclass` SET `smallName` = ? , `smallBigId` = ? , `smallText` = ? WHERE `id` = ?";
+            Object[] params={smallName,smallBigId,smallText,id};
+            int res=this.excutUpdateRows(sql,params);
+            if (res>0){
+                flag=true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            this.closeConn();
+        }
+        return flag ;
     }
 
 

@@ -30,16 +30,16 @@ public class GoodsNewServlet extends HttpServlet {
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
         if ("select".equals(action)) {
-            int pageCurrenNo = Integer.parseInt(request.getParameter("pageCurrenNo"));
-            int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+            int pageCurrentNo = Integer.parseInt(request.getParameter("pageCurrentNo"));
+            int pagesize = Integer.parseInt(request.getParameter("pagesize"));
             String goodName = request.getParameter("goodName");
             int sellerName = Integer.parseInt(request.getParameter("sellerName"));
             int smallName = Integer.parseInt(request.getParameter("smallName"));
-            List<GoodsNew> list = goodsNewService.getGoods(goodName, sellerName, smallName, pageCurrenNo, pageSize);
+            List<GoodsNew> list = goodsNewService.getGoods(goodName, sellerName, smallName, pageCurrentNo, pagesize);
             PageSupport pageSupport = new PageSupport();
-            pageSupport.setPagesize(pageSize);
-            pageSupport.setPageCurrentNo(pageCurrenNo);
-            pageSupport.setTotalCount(goodsNewService.getTotalCount());
+            pageSupport.setpagesize(pagesize);
+            pageSupport.setPageCurrentNo(pageCurrentNo);
+            pageSupport.setTotalCount(goodsNewService.getTotalCount(goodName,sellerName,smallName));
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             pageSupport.setList(list);
 

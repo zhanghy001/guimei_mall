@@ -74,4 +74,24 @@ public class SuperUserServiceImpl implements SuperUserService {
     public int getSmallCount(String smallName, int smallBigId) {
         return superUserDao.getSmallCount(smallName,smallBigId);
     }
+
+    @Override    //添加小分类
+    public boolean creatSmall(String smallName, int smallBigId, String smallText) {
+        return superUserDao.creatSmall(smallName,smallBigId,smallText);
+    }
+
+    @Override    //删除小分类
+    public boolean deleteSmall(int id) {
+        return superUserDao.deleteSmall(id);
+    }
+
+    @Override
+    public SmallClass getSmallClassById(int id) {
+        return superUserDao.getSmallClassById(id);
+    }
+
+    @Override
+    public boolean updateSmallById(int id,String smallName,int smallBigId,String smallText) {
+        return superUserDao.updateSmallById(id,smallName,smallBigId,smallText);
+    }
 }

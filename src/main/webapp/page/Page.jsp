@@ -11,6 +11,15 @@
     <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="next" >下一页</a>
     <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="end">末页</a>
     &nbsp;&nbsp;共<span id="totalPages"></span>页&nbsp;&nbsp;
+
+    <select id="jump1">
+
+        <%--<option name="op1" value="${tea.count}">第${tea.count}页</option>--%>
+
+    </select> &nbsp;&nbsp;
+    <b class="layui-btn layui-btn-sm" onclick="jump()">跳转页面</b>
+
+
 </body>
 
 <script>

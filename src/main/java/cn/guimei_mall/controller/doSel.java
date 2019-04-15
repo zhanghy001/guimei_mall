@@ -35,12 +35,12 @@ public class doSel extends HttpServlet {
         if ("select".equals(action)) {
             int usern=Integer.parseInt(request.getParameter("id"));
             int pageCurrentNo=Integer.parseInt(request.getParameter("pageCurrentNo"));
-            int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+            int pagesize=Integer.parseInt(request.getParameter("pagesize"));
 
 
             PageSupport pageSupport=new PageSupport();
 
-            pageSupport.setPagesize(pageSize);
+            pageSupport.setpagesize(pagesize);
             pageSupport.setPageCurrentNo(pageCurrentNo);
 
             pageSupport.setTotalPages(pageSupport.getTotalPages());

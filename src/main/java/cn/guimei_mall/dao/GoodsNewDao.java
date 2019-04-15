@@ -8,7 +8,7 @@ public interface GoodsNewDao {
     /**
      * 查询全部
      */
-    List<GoodsNew> getGoods(String goodsName,int goodsSeId,int goodsSmalId,int pageCurrentNo, int pageSize);
+    List<GoodsNew> getGoods(String goodsName,int goodsSeId,int goodsSmalId,int pageCurrentNo, int pagesize);
     /**
      * 查询商家名字
      */
@@ -36,7 +36,13 @@ public interface GoodsNewDao {
     /**
      * 添加、级联查询
      */
+
     int addGoods(GoodsNew goods);
+
+    /**
+     * 查询总条数
+     */
+    int getTotalCount(String goodsName, int goodsId, int smallId);
     /**
      * 分页
      */

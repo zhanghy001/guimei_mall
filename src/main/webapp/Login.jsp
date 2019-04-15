@@ -69,58 +69,6 @@
             top: -70px;
         }
     </style>
-    <%--登录操作--%>
-    <script>
-        $(function () {
-            var nameSta=false;
-            var pwdSta=false;
-            $(".core4").click(function () {
-                if($(".core1").val().trim()==""){
-                    // $(".lab1").html("账号不完整");
-                    alert("账号不完整");
-                    nameSta=false;
-                }else {
-                    nameSta=true;
-                    $(".lab1").html("");
-                }
-                if($(".core2").val().trim()==""){
-                    // $(".lab2").html("密码不完整");
-                    alert("密码不完整");
-                    pwdSta=false;
-                }else {
-                    pwdSta=true;
-                    $(".lab2").html("");
-                }
-                if(nameSta && pwdSta){
-                    if($(".core3 [type=radio]:checked").val()=="商家"){
-                        $(".move").prop("action","doSel?action=cusLogin")
-                    }
-                    if($(".core3 [type=radio]:checked").val()=="管理员"){
-                        $(".move").prop("action","doUser?action=userLogin")
-                    }
-                }
-            })
-            //     $(".core4").click(function () {
-            //         for(var i=0 ;i<$(".core3 [type=radio]").length;i++){
-            //             if($(".core3 [type=radio]")[i].checked==true){
-            //                 alert($(".core3 [type=radio]")[i])
-            //             }
-            //         }
-            //         alert($(".core3 [type=radio]:checked").val())
-            //     })
-        })
-    </script>
-
- <script>
-        $(function () {
-            var msg="${param.msg}";
-            if(msg.length>0){
-                if(msg=="1"){
-                    $("#err1").html("登录失败").css("color","red");
-                }
-            }
-        })
-    </script>
 
 </head>
 <body>
@@ -144,4 +92,49 @@
                 <label id="err1"></label>
 </div>
 </body>
+<%--登录操作--%>
+<script type="text/javascript">
+    $(function () {
+
+        var msg="${param.msg}";
+        if(msg.length>0){
+            if(msg=="1"){
+                $("#err1").html("登录失败").css("color","red");
+            }
+        }
+
+
+        var nameSta=false;
+        var pwdSta=false;
+        $(".core4").click(function () {
+            if($(".core1").val().trim()==""){
+                // $(".lab1").html("账号不完整");
+                alert("账号不完整");
+                nameSta=false;
+            }else {
+                nameSta=true;
+                $(".lab1").html("");
+            }
+            if($(".core2").val().trim()==""){
+                // $(".lab2").html("密码不完整");
+                alert("密码不完整");
+                pwdSta=false;
+            }else {
+                pwdSta=true;
+                $(".lab2").html("");
+            }
+            if(nameSta && pwdSta){
+                if($(".core3 [type=radio]:checked").val()=="商家"){
+                    $(".move").prop("action","doSel?action=cusLogin")
+                }
+                if($(".core3 [type=radio]:checked").val()=="管理员"){
+                    $(".move").prop("action","doUser?action=userLogin")
+                }
+            }
+        })
+
+    })
+
+
+</script>
 </html>

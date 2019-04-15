@@ -14,8 +14,8 @@ public class CustomerNewServiceImpl implements CustomerNewService {
     }
 
     @Override
-    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pageSize) {
-        return customerNewDao.getCustomerNew(cid,name,sex,pageCurrentNo,pageSize);
+    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize) {
+        return customerNewDao.getCustomerNew(cid,name,sex,pageCurrentNo,pagesize);
     }
 
     @Override

@@ -111,6 +111,14 @@
             $("#pageNo").append(data.pageCurrentNo);
             $("#totalPages").empty();
             $("#totalPages").append(data.totalPages);
+
+
+            $("#jump1").empty();
+            for (var i = 1; i <= data.totalPages; i++) {
+                $("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+            }
+            $("#jump1").val(data.pageCurrentNo);
+
             showHide();
 
         }

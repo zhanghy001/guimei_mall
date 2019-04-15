@@ -35,7 +35,7 @@ public class doSmallClassServlet extends HttpServlet {
             PageSupport pageSupport=new PageSupport();
             pageSupport.setList(smallClassList);
             pageSupport.setPageCurrentNo(pageCurrentNo);
-            pageSupport.setPagesize(pagesize);
+            pageSupport.setpagesize(pagesize);
             pageSupport.setTotalCount(sus.getSmallCount(smallName,smallBigId));
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             String smallJson= JSON.toJSONString(pageSupport);
@@ -49,15 +49,60 @@ public class doSmallClassServlet extends HttpServlet {
             List<BigClass> bigClassList=sus.getBigClassList(-1,-1);
             int id= Integer.parseInt(request.getParameter("id"));
             StringBuffer sb=new StringBuffer();
-            if (id==1){
+            if (id==-1){
                 sb.append("<option value='-1'>全部</option>");
             }
             for (int i = 0; i <bigClassList.size() ; i++) {
-               sb.append("<option value="+bigClassList.get(i).getId()+">"+bigClassList.get(i).getBigName()+"</option>");
+                if (bigClassList.get(i).getId()==id){
+                    sb.append("<option selected value="+bigClassList.get(i).getId()+">"+bigClassList.get(i).getBigName()+"</option>");
+                }else {
+                    sb.append("<option  value="+bigClassList.get(i).getId()+">"+bigClassList.get(i).getBigName()+"</option>");
+
+                }
             }
             out.print(sb);
             out.flush();
             out.close();
+
+        }
+        if ("smallAdd".equals(action)){
+            String smallName=request.getParameter("smallName");
+            int smallBigId= Integer.parseInt(request.getParameter("smallBigId"));
+            String smallText=request.getParameter("smallText");
+            if (sus.creatSmall(smallName,smallBigId,smallText)){
+                request.getRequestDispatcher(request.getContextPath()+"/page/smallclass/smallAdd.jsp?msg=0").forward(request,response);
+            }else {
+                request.getRequestDispatcher(request.getContextPath()+"/page/smallclass/smallAdd.jsp?msg=1").forward(request,response);
+            }
+        }
+
+        if ("delSmall".equals(action)){
+            int id= Integer.parseInt(request.getParameter("id"));
+            out.print(sus.deleteSmall(id));
+            out.flush();
+            out.close();
+
+        }
+        if ("getSmall".equals(action)){
+            int id= Integer.parseInt(request.getParameter("id"));
+            SmallClass smallClass=sus.getSmallClassById(id);
+            request.setAttribute("Small",smallClass);
+            request.getRequestDispatcher(request.getContextPath()+"/page/smallclass/SmallUpdate.jsp").forward(request,response);
+
+        }
+        if ("SmallUpdate".equals(action)){
+            int id= Integer.parseInt(request.getParameter("id"));
+            String smallName=request.getParameter("smallName");
+            int smallBigId= Integer.parseInt(request.getParameter("smallBigId"));
+            String smallText=request.getParameter("smallText");
+
+            if (sus.updateSmallById(id,smallName,smallBigId,smallText)){
+                SmallClass smallClass=sus.getSmallClassById(id);
+                request.setAttribute("Small",smallClass);
+                request.getRequestDispatcher(request.getContextPath()+"/page/smallclass/SmallUpdate.jsp?msg=0").forward(request,response);
+            }else {
+                request.getRequestDispatcher(request.getContextPath()+"/page/smallclass/SmallUpdate.jsp?msg=1").forward(request,response);
+            }
 
         }
 

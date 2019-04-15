@@ -31,32 +31,32 @@
 
     <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
     <script type="text/javascript">
-        var pageCurrenNo = 1; // 当前页面
-        var pageSize = 5;  //  显示页面
+        var pageCurrentNo = 1; // 当前页面
+        var pagesize = 5;  //  显示页面
         $(function () {
             // 首页
             $("#begin").click(function () {
-                pageCurrenNo = 1;
+                pageCurrentNo = 1;
                 Announce();
             });
             //  上一页
             $("#prev").click(function () {
-                pageCurrenNo =pageCurrenNo - 1;
+                pageCurrentNo =pageCurrentNo - 1;
                 Announce();
             });
             //  下一页
             $("#next").click(function () {
-                pageCurrenNo =pageCurrenNo + 1;
+                pageCurrentNo =pageCurrentNo + 1;
                 Announce();
             });
             //  末页
             $("#end").click(function () {
-                pageCurrenNo = $("#totalPages").html();
+                pageCurrentNo = $("#totalPages").html();
                 Announce();
             });
             //  转跳
             $("#page-btn").click(function () {
-                pageCurrenNo = $("#inputPage").val();
+                pageCurrentNo = $("#inputPage").val();
                 Announce();
             });
             Announce();
@@ -79,7 +79,7 @@
             var id = $("#id").val();
             var cusName = $("#cusName").val();
             var cusSex = $("#cusSex").val();
-            $.getJSON("/CustomerNewServlet",{"action":"select","id":id,"cusName":cusName,"cusSex":cusSex,"pageCurrenNo":pageCurrenNo,"pageSize":pageSize},callback);
+            $.getJSON("/CustomerNewServlet",{"action":"select","id":id,"cusName":cusName,"cusSex":cusSex,"pageCurrentNo":pageCurrentNo,"pagesize":pagesize},callback);
             function callback(data) {
                 $("#pageNo").html(data.pageCurrentNo);
                 $("#totalPages").html(data.totalPages);

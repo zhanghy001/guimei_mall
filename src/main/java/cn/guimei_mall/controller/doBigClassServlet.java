@@ -34,7 +34,7 @@ public class doBigClassServlet extends HttpServlet {
             PageSupport pageSupport=new PageSupport();
             pageSupport.setList(bigClassList);
             pageSupport.setPageCurrentNo(pageCurrentNo);
-            pageSupport.setPagesize(pagesize);
+            pageSupport.setpagesize(pagesize);
             pageSupport.setTotalCount(sus.bigCount());
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             String bigJson= JSON.toJSONString(pageSupport);

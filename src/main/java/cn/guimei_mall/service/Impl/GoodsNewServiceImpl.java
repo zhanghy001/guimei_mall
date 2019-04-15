@@ -17,8 +17,8 @@ public class GoodsNewServiceImpl implements GoodsNewService {
     }
 
     @Override
-    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize) {
-        return goodsNewDao.getGoods(goodName,goodSeId,goodSmalId,pageCurrentNo,pageSize);
+    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pagesize) {
+        return goodsNewDao.getGoods(goodName,goodSeId,goodSmalId,pageCurrentNo,pagesize);
     }
 
     @Override
@@ -54,6 +54,11 @@ public class GoodsNewServiceImpl implements GoodsNewService {
     @Override
     public int addGoods(GoodsNew goods) {
         return goodsNewDao.addGoods(goods);
+    }
+
+    @Override
+    public int getTotalCount(String goodsName, int goodsId, int smallId) {
+        return goodsNewDao.getTotalCount(goodsName,goodsId,smallId);
     }
 
     @Override

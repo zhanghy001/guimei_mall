@@ -166,11 +166,11 @@ public class SellerDaoimpl extends BaseDao implements SellerDao {
      * @param sId
      * @param selleruser
      * @param pageCurrentNo
-     * @param pageSize
+     * @param pagesize
      * @return
      */
     @Override
-    public List<Seller> getNewsListBy(int sId, String selleruser, int pageCurrentNo, int pageSize) {
+    public List<Seller> getNewsListBy(int sId, String selleruser, int pageCurrentNo, int pagesize) {
         List<Seller> newsList = new ArrayList<>();
         try {
             if (getConn()) {
@@ -184,7 +184,7 @@ public class SellerDaoimpl extends BaseDao implements SellerDao {
                     sql.append(" and title=\'" + selleruser + "\'");//加引号
                 }
                 sql.append(" limit ?,?");
-                Object[] params = {(pageCurrentNo - 1) * pageSize, pageSize};
+                Object[] params = {(pageCurrentNo - 1) * pagesize, pagesize};
                 ResultSet rs = this.excuteSelect(sql.toString(), params);
                 while (rs.next()) {
                     Seller s = new Seller();

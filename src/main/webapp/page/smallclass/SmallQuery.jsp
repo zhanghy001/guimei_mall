@@ -18,7 +18,7 @@
     <select name="bigName" id="bigName">
 
     </select>
-    <input class="layui-btn" type="button" onclick="getList()" value="查询">
+    <input class="layui-btn" type="button" onclick="selectList()" value="查询">
 
 
         <table width="100%" style="text-align: center" class="layui-table">
@@ -46,7 +46,7 @@
 </body>
 <script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
-    $("#bigName").load("doSmall?action=getBigName&id=1");
+    $("#bigName").load("doSmall?action=getBigName&id=-1");
     $(function () {
         getList();
         //下一页
@@ -73,6 +73,16 @@
         })
 
     })
+
+    function selectList() {
+        pageCurrentNo=1;
+        getList();
+    }
+    function jump() {
+        pageCurrentNo= $("#jump1").val();
+        getList();
+    }
+
     //判断页码 显示 隐藏
     function showHide() {
         if (pageCurrentNo==$("#totalPages").html() ||$("#totalPages").html()==0) {
@@ -96,6 +106,7 @@
             smallBigId="-1";
         }
         $.getJSON("doSmall",{"action":"smallQuery","smallName":smallName,"smallBigId":smallBigId,"pageCurrentNo":pageCurrentNo,"pagesize":pagesize},callback)
+
         function callback(data) {
             $("#smallList").empty();
         //    $("#bigName").empty();
@@ -105,20 +116,48 @@
                    "<td>"+data.list[i].smallName+"</td>\n" +
                    "<td>"+data.list[i].bigName+"</td>\n" +
                    "<td>"+data.list[i].smallText+"</td>\n" +
-                   "<td><a class=\"layui-btn\" href=\"doSmall?action=smallUpdateById&id=\">修改</a></td>\n" +
-                   "<td><a class=\"layui-btn\" href=\"doSmall?action=smallDel&id=\">删除</a></td>\n" +
+                   "<td><a class=\"layui-btn\" href='doSmall?action=getSmall&id="+data.list[i].id+"'>修改</a></td>\n" +
+                   "<td><a href='javascript:void(0)' onclick='delBig("+ data.list[i].id+",this)' class=\"layui-btn\">删除</a></td>\n" +
                    "</tr>");
                //  alert("ddd")
 
 
             }
+
+
+
+
             $("#pageNo").empty();
             $("#pageNo").append(data.pageCurrentNo);
             $("#totalPages").empty();
             $("#totalPages").append(data.totalPages);
+
+            $("#jump1").empty();
+            for (var i = 1; i <= data.totalPages; i++) {
+                $("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+            }
+            $("#jump1").val(data.pageCurrentNo);
+
+
             showHide();
         }
 
+
+    }
+
+    function delBig(id,a) {
+
+        if (confirm("确认删除吗？")==true){
+            $.getJSON("doSmall",{"action":"delSmall","id":id},callback)
+            function callback(data){
+                if (data==true){
+                    alert("删除成功");
+                    $(a).parent().parent().remove();
+                } else {
+                    alert("删除失败");
+                }
+            }
+        }
 
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
     @Override
-    public List<Announcement> getAnnounce(int pageCurrentNo,int pageSize) {
+    public List<Announcement> getAnnounce(int pageCurrentNo,int pagesize) {
         List<Announcement> announcementList = new ArrayList<>();
         try {
             // 获取连接
@@ -24,7 +24,7 @@ public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
 
             StringBuffer sql = new StringBuffer("select * from announcement");
             sql.append(" limit ?,?");
-            Object[] p = {(pageCurrentNo-1)*pageSize,pageSize};
+            Object[] p = {(pageCurrentNo-1)*pagesize,pagesize};
             ResultSet rs = this.excuteSelect(sql.toString(),p);
 
             while (rs.next()){

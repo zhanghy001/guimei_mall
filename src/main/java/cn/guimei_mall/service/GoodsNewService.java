@@ -8,7 +8,7 @@ public interface GoodsNewService {
     /**
      * 查询全部
      */
-    List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize);
+    List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pagesize);
     /**
      * 根据id查询
      */
@@ -37,6 +37,12 @@ public interface GoodsNewService {
      * 添加、级联查询
      */
     int addGoods(GoodsNew goods);
+    /**
+     * 查询总条数
+     */
+    int getTotalCount(String goodsName, int goodsId, int smallId);
+
+
     /**
      * 分页
      */

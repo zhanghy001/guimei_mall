@@ -11,7 +11,7 @@ public interface AnnouncementDao {
     /**
      * 查询全部
      */
-    List<Announcement> getAnnounce(int pageCurrentNo,int pageSize);
+    List<Announcement> getAnnounce(int pageCurrentNo,int pagesize);
     /**
      * 根据id查询
      */

@@ -27,15 +27,15 @@ public class CustomerNewServlet extends HttpServlet {
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
         if ("select".equals(action)){
-            int pageCurrenNo = Integer.parseInt(request.getParameter("pageCurrenNo"));
-            int pageSize =  Integer.parseInt(request.getParameter("pageSize"));
+            int pageCurrentNo = Integer.parseInt(request.getParameter("pageCurrentNo"));
+            int pagesize =  Integer.parseInt(request.getParameter("pagesize"));
             String id = request.getParameter("id");
             String cusName = request.getParameter("cusName");
             String cusSex = request.getParameter("cusSex");
-            List<CustomerNew> list = customerNewService.getCustomerNew(id,cusName,cusSex,pageCurrenNo,pageSize);
+            List<CustomerNew> list = customerNewService.getCustomerNew(id,cusName,cusSex,pageCurrentNo,pagesize);
             PageSupport pageSupport = new PageSupport();
-            pageSupport.setPagesize(pageSize);
-            pageSupport.setPageCurrentNo(pageCurrenNo);
+            pageSupport.setpagesize(pagesize);
+            pageSupport.setPageCurrentNo(pageCurrentNo);
             pageSupport.setTotalCount(customerNewService.getTotalCount());
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             pageSupport.setList(list);
