@@ -8,31 +8,19 @@
 </head>
 <body>
 
-    <form action="doCus?action=cusQueryLike&pageNumber=1" method="post" >
+    <form action="" method="post" >
         <label>ID</label>
-        <input type="text" name="id">
+        <input type="text" name="id" value=" ">
         <label>姓名</label>
-        <input type="text" name="cusName">
+        <input type="text" name="cusName" value=" ">
         <label>姓别</label>
-        <input type="text" name="cusSex">
-        <input class="layui-btn" type="submit" value="查询">
+        <input type="text" name="cusSex" value=" ">
+        <input class="layui-btn" type="button" value="查询" onclick="Announce()">
     </form>
 
-    <c:choose>
-        <c:when test="${not empty Page.pageData}">
+
             <table width="100%" style="text-align: center" class="layui-table">
-                <tr>
-                    <th>ID</th>
-                    <th>姓名</th>
-                    <th>登录账号</th>
-                    <th>Email</th>
-                    <th>性别</th>
-                    <th>头像</th>
-                    <th>爱好</th>
-                    <th>证件号</th>
-                    <th>生日</th>
-                    <th colspan="2">操作</th>
-                </tr>
+
 
                 <tr>
                     <td colspan="10">
@@ -40,12 +28,84 @@
                     </td>
                 </tr>
             </table>
-        </c:when>
-        <c:otherwise>
-            <h3>没有顾客</h3>
-        </c:otherwise>
-    </c:choose>
 
+    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+    <script type="text/javascript">
+        var pageCurrenNo = 1; // 当前页面
+        var pageSize = 5;  //  显示页面
+        $(function () {
+            // 首页
+            $("#begin").click(function () {
+                pageCurrenNo = 1;
+                Announce();
+            });
+            //  上一页
+            $("#prev").click(function () {
+                pageCurrenNo =pageCurrenNo - 1;
+                Announce();
+            });
+            //  下一页
+            $("#next").click(function () {
+                pageCurrenNo =pageCurrenNo + 1;
+                Announce();
+            });
+            //  末页
+            $("#end").click(function () {
+                pageCurrenNo = $("#totalPages").html();
+                Announce();
+            });
+            //  转跳
+            $("#page-btn").click(function () {
+                pageCurrenNo = $("#inputPage").val();
+                Announce();
+            });
+            Announce();
+        })
+        function Announce() {
+            $("table").html("");
+            $("table").html(" <tr>\n" +
+                "                    <th>ID</th>\n" +
+                "                    <th>姓名</th>\n" +
+                "                    <th>登录账号</th>\n" +
+                "                    <th>Email</th>\n" +
+                "                    <th>性别</th>\n" +
+                "                    <th>头像</th>\n" +
+                "                    <th>爱好</th>\n" +
+                "                    <th>证件号</th>\n" +
+                "                    <th>生日</th>\n" +
+                "                    <th colspan=\"2\">操作</th>\n" +
+                "                </tr>");
 
+            var id = $("#id").val();
+            var cusName = $("#cusName").val();
+            var cusSex = $("#cusSex").val();
+            $.getJSON("/CustomerNewServlet",{"action":"select","id":id,"cusName":cusName,"cusSex":cusSex,"pageCurrenNo":pageCurrenNo,"pageSize":pageSize},callback);
+            function callback(data) {
+                $("#pageNo").html(data.pageCurrentNo);
+                $("#totalPages").html(data.totalPages);
+                // alert(data.pageCurrentNo);
+                // `id``cusName``cusLoginName``cusPassword``cusEmail``cusSex``cusPhoto``cusHobby``cusCode``cusBirthday`
+                for (var i = 0; i<data.list.length ; i++) {
+                    $("table").append("<tr>" +
+                        "<td>"+data.list[i].id+"</td>" +
+                        "<td>"+data.list[i].cusName+"</td>" +
+                        "<td>"+data.list[i].cusLoginName+"</td>" +
+                        "<td>"+data.list[i].cusEmail+"</td>"+
+                        "<td>"+data.list[i].cusSex+"</td>"+
+                        "<td><img src='CusImage/"+data.list[i].cusPhoto+"'> </td>"+
+                        "<td>"+data.list[i].cusHobby+"</td>"+
+                        "<td>"+data.list[i].cusCode+"</td>"+
+                        "<td>"+data.list[i].cusBirthday+"</td>"+
+                        " <th ><a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +
+                        // " <a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='dele("+data.list[i].id+",this)'>删除</a>" +
+                        "</th>"+
+                        "</tr>");
+                }
+            }
+        }
+        function update(id) {
+            location.href = "/page/customer/cusUpdate.jsp?id="+id;
+        }
+    </script>
 </body>
 </html>
