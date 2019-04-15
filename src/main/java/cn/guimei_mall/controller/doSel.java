@@ -47,7 +47,7 @@ public class doSel extends HttpServlet {
 
             //将此对象转换称jSON数据
             String pageSupportJson= JSON.toJSONString(pageSupport);
-            System.out.println(pageSupportJson);
+
             out.write(pageSupportJson);
         }else if("selAdd".equals(action)){
             String sellerName = request.getParameter("sellerName");

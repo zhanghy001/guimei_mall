@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="/GoodsNewServlet?action=add" method="post" enctype="multipart/form-data" >
     <di id="d1"></di>
     商品名称<input type="text"  name="goodsName" id="goodsName">
     小分类名称<select name="goodsSmalId" id="goodsSmalId">
@@ -18,6 +18,7 @@
     商品的价格<input type="text"  name="goodsMoney" >
     商品的数量<input type="text" name="goodsNumber" >
     商品的图像<input type="file"  name="goodsImage" onchange="checkImage(this.value)">
+    
     商品的运费<input type="text"  name="goodsCarriage" >
     商品的类型<select name="goodsType" id="goodsType">
     <option value="${0}">新品</option>
@@ -29,15 +30,42 @@
     商品的折扣<select name="goodsDiscId" id="goodsDiscId">
     <option value="-1">全部</option>
 </select>
-    <input type="button" value="添加" class="layui-btn" id="sub"  disabled="true" onclick="addGoods()">
+    <input type="submit" value="添加" class="layui-btn" id="sub"  disabled="true" >
 </form>
-<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
     $(function () {
+        var flag = '${param.flag}';
+        if (flag != null && flag != ""){
+            if (flag == "true"){
+                alert("添加成功");
+            }else {
+                alert("添加失败");
+            }
+        }
+
         getSellerName();
         getsmall();
         getDiscRate();
     });
+    function checkImage(val) {
+        var type=val.substring(val.lastIndexOf(".")+1);
+        console.log(type)
+        var types=["gif","bmp","jpg","png"];
+        var status=false;
+        for(var i=0;i<types.length;i++){
+            if(type.toLowerCase()==types[i]){
+                status=true;
+                break;
+            }
+        }
+        console.log(status);
+        if(!status){
+            document.getElementById("sub").disabled=true;
+        }else {
+            document.getElementById("sub").disabled=false;
+        }
+    }
     function addGoods(){
         // var atitle = $("#aTitle").val();
         // if (atitle == "" || atitle == undefined){
@@ -54,10 +82,12 @@
         //     alert("标题不能为空");
         //     return;
         // }
+        var ss = $(".goodsImage").val();
+
         var paramArray = $("form").serializeArray(); //序列化为json数组
         var queryString = $.param(paramArray);//将数组序列化为字符串
         $.getJSON("/GoodsNewServlet?action=add",queryString,callback);
-        function callback(data) {
+        function callback(data) {1
             if (data.flag == "true"){
                 alert("添加成功")
                 $("#aTitle").val("");

@@ -182,10 +182,9 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
             while (rs.next()){
                 GoodsNew goods = new GoodsNew();
                 int id = rs.getInt("id");
-                String goodsDiscRate = rs.getString("discRate");
-
+                Double goodsDiscRate = Double.parseDouble(rs.getString("discRate"));
                 goods.setId(id);
-                goods.setGoodsDiscRate(Double.parseDouble(goodsDiscRate));
+                goods.setGoodsDiscRate(goodsDiscRate);
 
                 goodsList.add(goods);
             }
@@ -270,9 +269,9 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
             this.getConn();
             //创建Statement 执行sql
             String sql = "UPDATE `goods` " +
-                    "SET `goodsName` = ?,`goodsSmalId` = ?,`goodsMoney` = ? , `goodsNumber` = ? , `goodsImage` = ? , `goodsCarriage` = ? , `goodsType` = ? , `goodsSeId` = ? , `goodsDiscId` = ? \n" +
+                    "SET `goodsName` = ?,`goodsSmalId` = ?,`goodsMoney` = ? , `goodsNumber` = ? , `goodsCarriage` = ? , `goodsType` = ? , `goodsSeId` = ? , `goodsDiscId` = ? \n" +
                     "WHERE `id` = ? ";
-            Object [] p = {good.getGoodsName(),good.getGoodsSmalId(),good.getGoodsMoney(),good.getGoodsNumber(),good.getGoodsImage(),good.getGoodsCarriage(),good.getGoodsType(),good.getGoodsSeId(),good.getGoodsDiscId(),id};
+            Object [] p = {good.getGoodsName(),good.getGoodsSmalId(),good.getGoodsMoney(),good.getGoodsNumber(),good.getGoodsCarriage(),good.getGoodsType(),good.getGoodsSeId(),good.getGoodsDiscId(),id};
 
             //返回结果
             ire = this.excutUpdateRows(sql,p);

@@ -4,92 +4,148 @@
     <title>Title</title>
     <base href="<%=request.getContextPath()%>/"/>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <script src="static/js/jquery-2.1.1.min.js"></script>
+
     <%@include file="layUI.jsp"%>
 
-    <script>
-        $(function () {
-            $.ajax({
-                url:"doSmall",
-                data:"action=smallNameAll",
-                type:"post",
-                dataType:"json",
-                success:function (list) {
-                    $.each(list,function (index,all) {
-                        $("#smallName").append("<option value='"+all.smallName+"'>"+all.smallName+"</option>")
-                    })
-                }
-            })
-       /*     $.ajax({
-                url:"doSel",
-                data:"action=selNameAll",
-                type:"post",
-                dataType:"json",
-                success:function (list) {
-                    $.each(list,function (index,sel) {
-                        $("#sellerName").append("<option value='"+sel.sellerName+"'>"+sel.sellerName+"</option>")
-                    })
-                }
-            })*/
-        })
-    </script>
 </head>
 <body>
 <form action="doGoods?action=QueryLike&pageNumber=1" method="post" >
     <label>商品名称</label>
-    <input type="text" name="goodsName">
+    <input type="text" name="goodsName" id="goodsName" value="">
     <label>商家名称</label>
     <select name="sellerName" id="sellerName">
-        <option value="${Page.pageData[0].seller.sellerName}">${Page.pageData[0].seller.sellerName}</option>
+        <option value="-1">全部</option>
     </select>
     <label>小分类名称</label>
     <select name="smallName" id="smallName">
-        <option></option>
+        <option value="-1">全部</option>
     </select>
     <input class="layui-btn" type="submit" value="查询">
 </form>
-<c:choose>
-    <c:when test="${not empty Page.pageData}">
         <table width="100%" style="text-align: center" class="layui-table">
-            <tr>
-                <th>商品id</th>
-                <th>商品名称</th>
-                <th>小分类名称</th>
-                <th>商品的价格</th>
-                <th>商品的数量</th>
-                <th>商品的图像</th>
-                <th>商品的运费</th>
-                <th>商品的类型</th>
-                <th>商家名称</th>
-                <th>商品的折扣</th>
-                <th colspan="2">操作</th>
-            </tr>
-            <c:forEach items="${Page.pageData}" var="all">
-                <tr>
-                    <td>${all.goods.id}</td>
-                    <td>${all.goods.goodsName}</td>
-                    <td>${all.smallName}</td>
-                    <td>${all.goods.goodsMoney}</td>
-                    <td>${all.goods.goodsNumber}</td>
-                    <td><img src="GoodsImage/${all.goods.goodsImage}" ></td>
-                    <td>${all.goods.goodsCarriage}</td>
-                    <td>${all.goods.goodsType==0?'新品':'二手'}</td>
-                    <td>${all.seller.sellerName}</td>
-                    <td>${all.discount.discRate}</td>
-                    <td><a class="layui-btn" href="doGoods?action=UpdateById&id=${all.goods.id}">修改</a></td>
-                    <td><a class="layui-btn" href="doGoods?action=goodsDel&id=${all.goods.id}">删除</a></td>
-                </tr>
-            </c:forEach>
-            <tr>
-                <td colspan="12">
-                    <%@include file="Page.jsp"%>
-                </td>
-            </tr>
+
         </table>
-    </c:when>
-    <c:otherwise>
-        <h3>没有商品了</h3>
-    </c:otherwise>
-</c:choose>
+        <tr>
+        <td colspan="12">
+        <%@include file="Page.jsp"%>
+        </td>
+        </tr>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+    var pageCurrenNo = 1; // 当前页面
+    var pageSize = 5;  //  显示页面
+    $(function () {
+        // 首页
+        $("#begin").click(function () {
+            pageCurrenNo = 1;
+            Goods();
+        });
+        //  上一页
+        $("#prev").click(function () {
+            pageCurrenNo =pageCurrenNo - 1;
+            Goods();
+        });
+        //  下一页
+        $("#next").click(function () {
+            pageCurrenNo =pageCurrenNo + 1;
+            Goods();
+        });
+        //  末页
+        $("#end").click(function () {
+            pageCurrenNo = $("#totalPages").html();
+            Goods();
+        });
+        //  转跳
+        $("#page-btn").click(function () {
+            pageCurrenNo = $("#inputPage").val();
+            Goods();
+        });
+        Goods();
+        getSellerName();
+        getsmall();
+
+    });
+
+    /**
+     * 商品名下拉框
+     */
+    function getSellerName() {
+        $.getJSON("/GoodsNewServlet",{"action":"selectSell"},callback);
+        function callback(data) {
+            $(data).each(function () {
+                $("#sellerName").append("<option value=" + this.id + ">" + this.goodsSeName + "</option>");
+            })
+        }
+    }
+
+    /**
+     * 小分类下拉框
+     */
+    function getsmall() {
+        $.getJSON("/GoodsNewServlet",{"action":"selectsmall"},callback);
+        function callback(data) {
+            $(data).each(function () {
+                $("#smallName").append("<option value=" + this.id + ">" + this.goodsSmallName + "</option>");
+            })
+        }
+    }
+    function Goods() {
+        $("table").html("");
+        $("table").html("<tr>\n" +
+            "                <th>商品id</th>\n" +
+            "                <th>商品名称</th>\n" +
+            "                <th>小分类名称</th>\n" +
+            "                <th>商品的价格</th>\n" +
+            "                <th>商品的数量</th>\n" +
+            "                <th>商品的图像</th>\n" +
+            "                <th>商品的运费</th>\n" +
+            "                <th>商品的类型</th>\n" +
+            "                <th>商家名称</th>\n" +
+            "                <th>商品的折扣</th>\n" +
+            "                <th colspan=\"2\">操作</th>\n" +
+            "            </tr>");
+
+        var goodName = $("#goodsName").val();
+        var sellerName = $("#sellerName").val();
+        var smallName = $("#smallName").val();
+
+        $.getJSON("/GoodsNewServlet",{"action":"select","pageCurrenNo":pageCurrenNo,"pageSize":pageSize,"goodName":goodName,"sellerName":sellerName,"smallName":smallName},callback);
+        function callback(data) {
+            $("#pageNo").html(data.pageCurrentNo);
+            $("#totalPages").html(data.totalPages);
+            for (var i = 0; i<data.list.length ; i++) {
+                $("table").append("<tr>" +
+                    "<td>"+data.list[i].id+"</td>" +
+                    "<td>"+data.list[i].goodsName+"</td>" +
+                    "<td>"+data.list[i].goodsSmallName+"</td>" +
+                    "<td>"+data.list[i].goodsMoney+"</td>" +
+                    "<td>"+data.list[i].goodsNumber+"</td>" +
+                    "<td><img src='GoodsImage/"+data.list[i].goodsImage+"'> </td>"+
+                    "<td>"+data.list[i].goodsCarriage+"</td>"+
+                    "<td>${data.list[i].goodsType==0?'新品':'二手'}</td>" +
+                    "<td>"+data.list[i].goodsSeName+"</td>" +
+                    "<td>"+data.list[i].goodsDiscRate+"</td>" +
+                    " <th ><a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +
+                    " <a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='dele("+data.list[i].id+",this)'>删除</a>" +
+                    "</th>"+
+                    "</tr>");
+            }
+        }
+    }
+    function dele(id,bit) {
+        $.getJSON("/GoodsNewServlet","action=delect&id="+id,callback)
+        function callback(data) {
+            if (data.flag == "true"){
+                $(bit).parent().parent().remove();
+                alert("删除成功");
+            }else {
+                alert("删除失败");
+            }
+        }
+    }
+    function update(id) {
+        location.href = "page/goods/goodsUpdate.jsp?id="+id;
+    }
+</script>
 </body>
 </html>

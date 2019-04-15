@@ -68,7 +68,9 @@
         Goods();
         getSellerName();
         getsmall();
+
     });
+
     /**
      * 商品名下拉框
      */
@@ -123,8 +125,7 @@
                     "<td>"+data.list[i].goodsSmallName+"</td>" +
                     "<td>"+data.list[i].goodsMoney+"</td>" +
                     "<td>"+data.list[i].goodsNumber+"</td>" +
-                    "<td>"+"< img src='GoodsImage/" + data.list[i].goodsImage + "'>"+"</td>" +
-                  //  "<td> < img src='GoodsImage/" + data.list[i].goodsImage + "' +</td>" +
+                        "<td><img src='GoodsImage/"+data.list[i].goodsImage+"'> </td>"+
                     "<td>"+data.list[i].goodsCarriage+"</td>"+
                     "<td>${data.list[i].goodsType==0?'新品':'二手'}</td>" +
                     "<td>"+data.list[i].goodsSeName+"</td>" +
@@ -148,7 +149,7 @@
         }
     }
     function update(id) {
-        location.href = ""+id;
+        location.href = "page/goods/goodsUpdate.jsp?id="+id;
     }
 </script>
 </body>

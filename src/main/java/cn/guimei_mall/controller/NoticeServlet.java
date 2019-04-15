@@ -42,14 +42,15 @@ public class NoticeServlet extends HttpServlet {
             pageSupport.setTotalCount(announ.getTotalCount());
             pageSupport.setTotalPages(pageSupport.getTotalPages());
             pageSupport.setList(list);
+            String pageSupportJson= JSON.toJSONStringWithDateFormat(pageSupport,"yyyy-MM-dd");
 
-            String pageSupportJson = JSON.toJSONString(pageSupport);
             out.write(pageSupportJson);
         }else if ("selectid".equals(action)){
             String id = request.getParameter("id"); // 获取 ID
             Announcement announcement = announ.getIdAnnounce(Integer.parseInt(id));
-            String annJson= JSON.toJSONString(announcement);
-            out.write(annJson);
+
+            String pageSupportJson= JSON.toJSONStringWithDateFormat(announcement,"yyyy-MM-dd");
+            out.write(pageSupportJson);
         }else if ("add".equals(action)){
             try {
             DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,10 +78,8 @@ public class NoticeServlet extends HttpServlet {
         }else if ("updateid".equals(action)){
             String id = request.getParameter("id"); // 获取 ID
             Announcement announcement = announ.getIdAnnounce(Integer.parseInt(id));
-
-            //String annJson= JSON.toJSONStringWithDateFormat(announcement,"yyyy-MM-dd");
-            String annJson= JSON.toJSONString(announcement);
-            out.write(annJson);
+            String pageSupportJson= JSON.toJSONStringWithDateFormat(announcement,"yyyy-MM-dd");
+            out.write(pageSupportJson);
         }else if ("update".equals(action)){
             try {
                 DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
