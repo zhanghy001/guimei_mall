@@ -9,31 +9,45 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>个人信息</title>
+    <title>订单信息</title>
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
     <script>
         $(function () {
-            $.ajax({
-                url:"doOrder",
-                type:"post;",
-                dataType:"json",
-                success:function (data) {
-                    for (var i = 0; i <data.length; i++) {
-                      $("#tb")
-                          .append("<tr>"+
-                              "<td>data[i].orderse.orderseDate<td/>"+
-                              "<td>data[i].orderse.orderseAddress<td/>"+
-                              "<td>data[i].orderse.orderseMoney<td/>"+
-                              "<td>data[i].orderse.orderseStatus<td/>"+
-                              "<td>data[i].goods.goodsName<td/>"+
-                              "<td>data[i].goods.goodsMoney<td/>"+
-                              "<tr/>")
-                    }
+        });
+        function callback(list) {
+            $.each(list,function (i,data){
+                if(i<list.length-1){
+                $("#tb")
+                    .html("<tr>"+
+                        "<td>"+data.orderse.orderseDate+"<td/>"+
+                        "<td>"+data.orderse.orderseAddress+"<td/>"+
+                        "<td>"+data.orderse.orderseMoney+"<td/>"+
+                        "<td>"+data.orderse.orderseStatus+"<td/>"+
+                        "<td>"+data.goods.goodsName+"<td/>"+
+                        "<td>"+data.goods.goodsMoney+"<td/>"+
+                        "<tr/>");
+                }else {
+                    $("#totalPages").html(data.totalPages);
+                    $("#pageCurrentNo").html(data.pageCurrentNo);
                 }
-            })
-        })
+            });
+        }
+
+        function first(){
+            $.getJSON("/doOrder","action=first",callback);
+        }
+        function forward() {
+            $.getJSON("/doOrder","action=forward",callback);
+        }
+        function next(){
+            $.getJSON("/doOrder","action=next",callback);
+        }
+        function last(){
+            $.getJSON("/doOrder","action=last",callback);
+        }
     </script>
 
 </head>
@@ -64,7 +78,18 @@
                 <tbody id="tb">
 
                 </tbody>
+
             </table>
+            <input type="button" value="查询" id="query" onclick="first()"/>
+            <br/>
+            <input type="button" value="首页" id="first" onclick="first()"/>
+            <input type="button" value="上一页" id="forward" onclick="forward()"/>
+            <input type="button" value="下一页" id="next" onclick="next()"/>
+            <input type="button" value="尾页" id="last" onclick="last()"/>
+            <hr/>
+            总页数为:<p id="totalPages"></p>
+            <br/>
+            当前页为:<p id="pageCurrentNo"></p>
         </div>
     </div>
 </div>
