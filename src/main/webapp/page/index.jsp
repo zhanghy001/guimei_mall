@@ -67,7 +67,7 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe770;&nbsp;&nbsp;商家管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="/Seller/sellerQuery.jsp">查询商家</a></dd>
+                        <dd><a target="iframe_context" href="/page/seller/sellerQuery.jsp">查询商家</a></dd>
                         <dd><a target="iframe_context" href="/page/seller/sellerAdd.jsp">添加商家</a></dd>
                     </dl>
                 </li>

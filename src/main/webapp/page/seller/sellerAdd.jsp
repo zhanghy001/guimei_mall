@@ -24,7 +24,7 @@
         登录账号<input type="text"  name="sellerUser">
         密码<input type="text"  name="sellerPassword">
         性别<input type="radio" value="男" name="sellerSex" >男
-        <input type="radio" value="女" name="sellerSex" >女 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" value="女" name="sellerSex" >女 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
         生日<input type="date"  name="sellerBirthday"><br>
         证件号<input type="text"  name="sellerIdCard">
         Email<input type="text"  name="sellerEmail"><br>

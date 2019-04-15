@@ -21,7 +21,6 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
             Object[] params = {name, pwd};
             ResultSet rs = this.excuteSelect(sql, params);
             try {
-
                 while (rs.next()) {
                     seller.setSellerId(rs.getInt("id"));
                     seller.setSellerName(rs.getString("sellerName"));
@@ -43,6 +42,30 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
         return seller;
 
     }
+
+    /**
+     * 修改密码
+     * @param seller
+     * @return
+     */
+    @Override
+    public int updatePwd(Seller seller) {
+        int ire = 0;
+        if (getConn()) {
+            try {
+                //创建statument执行sql
+                String sql = "UPDATE `seller` SET  `sellerPassword` = ? WHERE `id` = ? ";
+                Object[] params = { seller.getSellerPassword(),seller.getSellerId()};
+                ire = this.excutUpdateRows(sql, params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                closeConn();
+            }
+        }
+        return ire;
+    }
+
 
     @Override
     public List<Seller> getList() {
@@ -98,11 +121,10 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
         Seller seller = new Seller();
         if (getConn()) {
             try {
-                String sql = "select `id`,`sellerName`,`sellerUser`,`sellerSex`,`sellerBirthday`,`sellerIdCard`,`sellerEmail`,`sellerTel` from `seller`where id=?";
+                String sql = "select * from `seller` where id=?";
                 Object[] params = {sId};
                 ResultSet rs = this.excuteSelect(sql, params);
-                while (rs.next()) {
-                    Seller s = new Seller();
+                if (rs.next()) {
                     int id = rs.getInt("id");
                     String sellerName = rs.getString("sellerName");
                     String sellerUser = rs.getString("sellerUser");
@@ -112,14 +134,15 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
                     String sellerEmail = rs.getString("sellerEmail");
                     String sellerTel = rs.getString("sellerTel");
                     String sellerAddress = rs.getString("sellerAddress");
-                    s.setSellerName(sellerName);
-                    s.setSellerUser(sellerUser);
-                    s.setSellerSex(sellerSex);
-                    s.setSellerBirthday(sellerBirthday);
-                    s.setSellerIdCard(sellerIdCard);
-                    s.setSellerEmail(sellerEmail);
-                    s.setSellerTel(sellerTel);
-                    s.setSellerAddress(sellerAddress);
+                    seller.setSellerId(id);
+                    seller.setSellerName(sellerName);
+                    seller.setSellerUser(sellerUser);
+                    seller.setSellerSex(sellerSex);
+                    seller.setSellerBirthday(sellerBirthday);
+                    seller.setSellerIdCard(sellerIdCard);
+                    seller.setSellerEmail(sellerEmail);
+                    seller.setSellerTel(sellerTel);
+                    seller.setSellerAddress(sellerAddress);
                 }
             } catch (
                     SQLException e) {
@@ -172,13 +195,10 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
             try {
                 //创建statument执行sql
                 String sql = "UPDATE `seller` SET `sellerName`= ? , `sellerUser` = ? ," +
-                        " `sellerSex` = ? ,`sellerBirthday`=?, `sellerIdCard` = ?, `sellerEmail`=?,`sellerTel`=? sellerAddress=? WHERE `id` = ?";
+                        " `sellerSex` = ? ,`sellerBirthday`=?, `sellerIdCard` = ?, `sellerEmail`=?,`sellerTel`=? ,sellerAddress=? WHERE `id` = ? ";
                 Object[] params = {seller.getSellerName(), seller.getSellerUser(), seller.getSellerSex(),
-                        seller.getSellerBirthday(), seller.getSellerIdCard(), seller.getSellerEmail(), seller.getSellerTel(), seller.getSellerAddress()};
+                        seller.getSellerBirthday(), seller.getSellerIdCard(), seller.getSellerEmail(), seller.getSellerTel(), seller.getSellerAddress(),seller.getSellerId()};
                 ire = this.excutUpdateRows(sql, params);
-                if (ire > 0) {
-                    System.out.println("修改成功!");
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

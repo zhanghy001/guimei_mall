@@ -7,6 +7,8 @@ import java.util.List;
 public interface SellerDao {
     //商家登陆
     Seller SellerLogin(String name,String pwd);
+    //修改密码
+    int updatePwd(Seller seller);
     //查询列表
     List<Seller> getList();
     //根据ID查询列表

@@ -30,10 +30,14 @@ public class doSel extends HttpServlet {
         PrintWriter out=response.getWriter();
         String action = request.getParameter("action");
         SellerService newsService = new SellerServicecImpl();
-        if (action == null || action == "") {
-            action = "select";
-        }
-        if ("select".equals(action)) {
+        if("sellerLogin".equals(action)){
+            String sn = request.getParameter("userLoginName");
+            String sp = request.getParameter("userPassword");
+            Seller seller = newsService.SellerLogin(sn,sp);
+            out.write(JSON.toJSONString(seller));
+            request.getSession().setAttribute("seller",seller);
+        }else if ("select".equals(action)) {
+
             int pageCurrentNo=Integer.parseInt(request.getParameter("pageCurrentNo"));
             System.out.println(pageCurrentNo);
             int pageSize=Integer.parseInt(request.getParameter("pageSize"));
@@ -43,11 +47,9 @@ public class doSel extends HttpServlet {
             pageSupport.setPageCurrentNo(pageCurrentNo);
             pageSupport.setTotalCount(newsService.getTotalCount(0,null));
             pageSupport.setTotalPages(pageSupport.getTotalPages());
-            System.out.println(pageSupport.getTotalPages());
             pageSupport.setList(newsList);
             //将此对象转换称jSON数据
             String pageSupportJson= JSON.toJSONString(pageSupport);
-            System.out.println(pageSupportJson);
             out.write(pageSupportJson);
         }else if("selAdd".equals(action)){
             String sellerName = request.getParameter("sellerName");
@@ -55,7 +57,6 @@ public class doSel extends HttpServlet {
             String sellerPassword = request.getParameter("sellerPassword");
             String sellerSex = request.getParameter("sellerSex");
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-
             String sellerBirthday = request.getParameter("sellerBirthday");
             Date d = null;
             try {
@@ -89,10 +90,10 @@ public class doSel extends HttpServlet {
             Seller news=newsService.getsListById(Integer.parseInt(id));
             String newsJson= JSON.toJSONStringWithDateFormat(news,"yyyy-MM-dd");
             out.write(newsJson);
-        }else if("selUpdate".equals(action)){
+        }else if("selUpdateLogin".equals(action)){
+            int id=Integer.parseInt(request.getParameter("id"));
             String sellerName = request.getParameter("sellerName");
             String sellerUser = request.getParameter("sellerUser");
-            String sellerPossword = request.getParameter("sellerPassword");
             String sellerSex = request.getParameter("sellerSex");
             String sellerBirthday = request.getParameter("sellerBirthday");
             String sellerIdCard = request.getParameter("sellerIdCard");
@@ -100,9 +101,9 @@ public class doSel extends HttpServlet {
             String sellerTel = request.getParameter("sellerTel");
             String sellerAddress = request.getParameter("sellerAddress");
             Seller s = new Seller();
+            s.setSellerId(id);
             s.setSellerName(sellerName);
             s.setSellerUser(sellerUser);
-            s.setSellerPassword(sellerPossword);
             s.setSellerSex(sellerSex);
             try {
                 s.setSellerBirthday(formatter.parse(sellerBirthday));
@@ -110,7 +111,7 @@ public class doSel extends HttpServlet {
                 s.setSellerEmail(sellerEmail);
                 s.setSellerTel(sellerTel);
                 s.setSellerAddress(sellerAddress);
-                int n = newsService.addseller(s);
+                int n = newsService.updateseller(s);
                 boolean flag = false;
                 if (n > 0) {
                     flag = true;
@@ -120,6 +121,20 @@ public class doSel extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+        }else if("sellerUpdatePwd".equals(action)){
+            int id=Integer.parseInt(request.getParameter("id"));
+            String sellerPassword = request.getParameter("sellerPassword");
+            Seller s = new Seller();
+            s.setSellerId(id);
+            s.setSellerPassword(sellerPassword);
+                int n = newsService.updatePwd(s);
+                boolean flag = false;
+                if (n > 0) {
+                    flag = true;
+                }
+                String addJson = "{\"flag\":\"" + flag + "\"}";
+                out.write(addJson);
 
         } else if ("selDelById".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));

@@ -16,6 +16,11 @@ public class SellerServicecImpl implements SellerService {
     }
 
     @Override
+    public int updatePwd(Seller seller) {
+        return sellerDao.updatePwd(seller);
+    }
+
+    @Override
     public List<Seller> getList() {
         return sellerDao.getList();
     }

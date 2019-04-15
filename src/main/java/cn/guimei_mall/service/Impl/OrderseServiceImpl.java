@@ -13,13 +13,19 @@ public class OrderseServiceImpl implements OrderseService {
     public OrderseServiceImpl() {
         orderseDao = new OrderseDaoImpl();
     }
+
     @Override
-    public List<Orderse> getListbyId() {
-        return orderseDao.getListbyId();
+    public List<Orderse> getListbyId(int pageCurrentNo, int pageSize) {
+        return null;
+    }
+
+    @Override
+    public int getTotalCount() {
+        return 0;
     }
 
     @Override
     public int updateOrderse(Orderse orderse) {
-        return orderseDao.updateOrderse(orderse);
+        return 0;
     }
 }

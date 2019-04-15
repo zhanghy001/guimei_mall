@@ -19,12 +19,12 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    欢迎商家&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${Sel.sellerName}
+                    欢迎商家&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${seller.sellerName}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a target="iframe_context" href="Seller/sellerQuery.jsp">查询个人信息</a></dd>
-                    <dd><a target="iframe_context" href="doSel?action=selQueryById&id=${Sel.id}">修改个人信息</a></dd>
-                    <dd><a target="iframe_context" href="doSel?action=QueryById&id=${Sel.id}">修改密码</a></dd>
+                    <dd><a target="iframe_context" href="Seller/sellerUpdate.jsp">修改个人信息</a></dd>
+                    <dd><a target="iframe_context" href="Seller/sellerUpdatePwd.jsp">修改密码</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a id="outPage" href="doSel?action=out" class="layui-icon ">&#x1007;</a></li>
@@ -45,7 +45,7 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;订单管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="doOrd?action=ordQueryBySel&pageNumber=1&selId=${Sel.id}">查询订单</a></dd>
+                        <dd><a target="iframe_context" href="/Seller/ordQuery.jsp">查询订单</a></dd>
                     </dl>
                 </li>
 
