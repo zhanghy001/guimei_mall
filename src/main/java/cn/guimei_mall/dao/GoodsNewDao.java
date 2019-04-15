@@ -8,7 +8,19 @@ public interface GoodsNewDao {
     /**
      * 查询全部
      */
-    List<GoodsNew> getGoods(int pageCurrentNo, int pageSize);
+    List<GoodsNew> getGoods(String goodsName,int goodsSeId,int goodsSmalId,int pageCurrentNo, int pageSize);
+    /**
+     * 查询商家名字
+     */
+    List<GoodsNew> getSellerName();
+    /**
+     * 查询小分类名
+     */
+    List<GoodsNew> getSmallName();
+    /**
+     *  折扣
+     */
+    List<GoodsNew> getDiscount();
     /**
      * 根据id查询
      */

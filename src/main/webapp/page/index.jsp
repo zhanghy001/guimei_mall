@@ -40,7 +40,7 @@
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe770;&nbsp;&nbsp;顾客管理</a>
                     <dl class="layui-nav-child">
                         <!--a标签中写ifream的name 则点击超链接 就会在指定name的ifream中显示-->
-                        <dd><a target="iframe_context"  href="doCus?action=cusQuery&pageNumber=1">查询顾客</a></dd>
+                        <dd><a target="iframe_context"  href="/page/customer/cusQuery.jsp">查询顾客</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -53,7 +53,7 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;商品管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="doGoods?action=goodsQuery&pageNumber=1">查询商品</a></dd>
+                        <dd><a target="iframe_context" href="/page/goods/goodsQuery.jsp">查询商品</a></dd>
                         <dd><a target="iframe_context" href="page/goods/goodsAdd.jsp">添加商品</a></dd>
                     </dl>
                 </li>

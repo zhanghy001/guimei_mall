@@ -21,16 +21,29 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
      * @return
      */
     @Override
-    public List<GoodsNew> getGoods(int pageCurrentNo, int pageSize) {
+    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize) {
         List<GoodsNew> goodsList = new ArrayList<>();
         try {
             // 获取连接
             this.getConn();
             //返回结果
 
-            StringBuffer sql = new StringBuffer("SELECT g.`id`,g.`goodsName`,g.`goodsSmalId`,sma.`smallName`,g.`goodsMoney`,g.`goodsNumber`,g.`goodsImage`,g.`goodsCarriage`,g.`goodsType`,g.`goodsSeId`,se.`sellerName`,g.`goodsDiscId`,dis.`discRate`" +
-                    "FROM`goods` g,`smallclass` sma,`seller` se,`discount` dis  WHERE g.`goodsSmalId` = sma.`smallBigId`" +
-                    " AND g.`goodsSeId` = se.`id`  AND g.`goodsDiscId` = dis.`id`");
+            StringBuffer sql = new StringBuffer("SELECT g.`id`,g.`goodsName`,g.`goodsSmalId`,sma.`smallName`,g.`goodsMoney`,g.`goodsNumber`,g.`goodsImage`,g.`goodsCarriage`,g.`goodsType`,g.`goodsSeId`,se.`sellerName`,g.`goodsDiscId`,dis.`discRate`\n" +
+                    "\tFROM `goods` g\n" +
+                    "\tINNER JOIN `smallclass` sma ON g.`goodsSmalId` = sma.`id`\n" +
+                    "\tINNER JOIN `seller` se ON g.`goodsSeId` = se.`id` \n" +
+                    "\tINNER JOIN `discount` dis ON g.`goodsDiscId` = dis.`id` \n" +
+                    "\tWHERE  1=1 ");
+            if (goodName != "" && goodName != null){
+                sql.append(" AND goodsName = "+goodName);
+            }
+            if (goodSeId != -1){
+                sql.append(" AND goodsSeId = "+goodSeId);
+            }
+            if (goodSmalId != -1){
+                sql.append(" AND goodsSmalId = "+goodSmalId);
+            }
+
             sql.append(" limit ?,?");
             Object[] p = {(pageCurrentNo-1)*pageSize,pageSize};
             ResultSet rs = this.excuteSelect(sql.toString(),p);
@@ -64,6 +77,113 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
                 goods.setGoodsSeId(goodsSeld);
                 goods.setGoodsSeName(goodsSeName);
                 goods.setGoodsDiscId(goodsDiscld);
+                goods.setGoodsDiscRate(goodsDiscRate);
+
+                goodsList.add(goods);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return goodsList;
+    }
+
+    /**
+     * 得到商家
+     * @return
+     */
+    @Override
+    public List<GoodsNew> getSellerName() {
+        List<GoodsNew> goodsList = new ArrayList<>();
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT * FROM `seller`");
+
+            Object[] p = {};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                GoodsNew goods = new GoodsNew();
+                int id = rs.getInt("id");
+                String sellerName = rs.getString("sellerName");
+
+                goods.setId(id);
+                goods.setGoodsSeName(sellerName);
+
+
+                goodsList.add(goods);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return goodsList;
+    }
+
+    /**
+     * 得到小分类
+     * @return
+     * SELECT * FROM `smallclass`
+     */
+    @Override
+    public List<GoodsNew> getSmallName() {
+        List<GoodsNew> goodsList = new ArrayList<>();
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT * FROM `smallclass`");
+
+            Object[] p = {};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                GoodsNew goods = new GoodsNew();
+                int id = rs.getInt("id");
+                String goodsSmallName = rs.getString("smallName");
+
+                goods.setId(id);
+                goods.setGoodsSmallName(goodsSmallName);
+
+
+                goodsList.add(goods);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return goodsList;
+    }
+
+    /**
+     * 折扣
+     * @return
+     */
+    @Override
+    public List<GoodsNew> getDiscount() {
+        List<GoodsNew> goodsList = new ArrayList<>();
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT * FROM `discount`");
+
+            Object[] p = {};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                GoodsNew goods = new GoodsNew();
+                int id = rs.getInt("id");
+                Double goodsDiscRate = Double.parseDouble(rs.getString("discRate"));
+                goods.setId(id);
                 goods.setGoodsDiscRate(goodsDiscRate);
 
                 goodsList.add(goods);
@@ -149,9 +269,9 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
             this.getConn();
             //创建Statement 执行sql
             String sql = "UPDATE `goods` " +
-                    "SET `goodsName` = ?,`goodsSmalId` = ?,`goodsMoney` = ? , `goodsNumber` = ? , `goodsImage` = ? , `goodsCarriage` = ? , `goodsType` = ? , `goodsSeId` = ? , `goodsDiscId` = ? \n" +
+                    "SET `goodsName` = ?,`goodsSmalId` = ?,`goodsMoney` = ? , `goodsNumber` = ? , `goodsCarriage` = ? , `goodsType` = ? , `goodsSeId` = ? , `goodsDiscId` = ? \n" +
                     "WHERE `id` = ? ";
-            Object [] p = {good.getGoodsName(),good.getGoodsSmalId(),good.getGoodsMoney(),good.getGoodsNumber(),good.getGoodsImage(),good.getGoodsCarriage(),good.getGoodsType(),good.getGoodsSeId(),good.getGoodsDiscId(),id};
+            Object [] p = {good.getGoodsName(),good.getGoodsSmalId(),good.getGoodsMoney(),good.getGoodsNumber(),good.getGoodsCarriage(),good.getGoodsType(),good.getGoodsSeId(),good.getGoodsDiscId(),id};
 
             //返回结果
             ire = this.excutUpdateRows(sql,p);
