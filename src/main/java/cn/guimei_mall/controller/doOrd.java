@@ -34,7 +34,7 @@ public class doOrd extends HttpServlet {
             int pageSize = Integer.parseInt(request.getParameter("pageSize"));
             List<Ord> newsList = ordService.getListbyId((pageCurrentNo - 1) * pageSize, pageSize);
             PageSupport pageSupport = new PageSupport();
-            pageSupport.setPagesize(pageSize);
+            pageSupport.setpagesize(pageSize);
             pageSupport.setPageCurrentNo(pageCurrentNo);
             pageSupport.setTotalCount(ordService.getTotalCount());
             pageSupport.setTotalPages(pageSupport.getTotalPages());

@@ -18,44 +18,71 @@
     <table width="100%" style="text-align: center" class="layui-table">
 
     </table>
-    <span id="pageNo"></span>/<span id="totalPages"></span>页&nbsp;&nbsp;&nbsp;&nbsp;
-    <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="begin">首页</a>
-    <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="prev">上一页</a>
-    <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="next">下一页</a>
-    <a class="layui-btn layui-btn-sm" href="javascript:void(0)" id="end">末页</a>
+
+    <tr>
+        <td colspan="12">
+            <%@include file="../Page.jsp"%>
+        </td>
+    </tr>
+
+
+
 <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
-    var pageCurrenNo = 1; // 当前页面
-    var pageSize = 5;  //  显示页面
+    // var pageCurrentNo = 1; // 当前页面
+    // var pagesize = 5;  //  显示页面
         $(function () {
             // 首页
             $("#begin").click(function () {
-                pageCurrenNo = 1;
+                pageCurrentNo = 1;
                 Announce();
             });
             //  上一页
             $("#prev").click(function () {
-                pageCurrenNo =pageCurrenNo - 1;
+                pageCurrentNo =pageCurrentNo - 1;
                 Announce();
             });
             //  下一页
             $("#next").click(function () {
-                pageCurrenNo =pageCurrenNo + 1;
+                pageCurrentNo =pageCurrentNo + 1;
                 Announce();
             });
             //  末页
             $("#end").click(function () {
-                pageCurrenNo = $("#totalPages").html();
+                pageCurrentNo = $("#totalPages").html();
                 Announce();
             });
             //  转跳
             $("#page-btn").click(function () {
-                pageCurrenNo = $("#inputPage").val();
+                pageCurrentNo = $("#inputPage").val();
                 Announce();
             });
             Announce();
         })
-        function Announce() {
+
+    //判断页码 显示 隐藏
+    function showHide() {
+        if (pageCurrentNo==$("#totalPages").html() ||$("#totalPages").html()==0) {
+            $("#next").hide();
+        }else {
+            $("#next").show();
+        }
+        if (pageCurrentNo==1){
+            $("#prev").hide();
+        }else {
+            $("#prev").show();
+        }
+    }
+
+
+
+    function jump() {
+        pageCurrentNo= $("#jump1").val();
+        Announce();
+    }
+
+
+    function Announce() {
             $("table").html("");
             $("table").html(" <tr>\n" +
                 "            <th>ID</th>\n" +
@@ -64,7 +91,7 @@
                 "            <th>日期</th>\n" +
                 "            <th colspan=\"2\">操作</th>\n" +
                 "        </tr>");
-            $.getJSON("/NoticeServlet",{"action":"select","pageCurrenNo":pageCurrenNo,"pageSize":pageSize},callback);
+            $.getJSON("/NoticeServlet",{"action":"select","pageCurrentNo":pageCurrentNo,"pagesize":pagesize},callback);
             function callback(data) {
                 $("#pageNo").html(data.pageCurrentNo);
                 $("#totalPages").html(data.totalPages);
@@ -81,6 +108,14 @@
                         "</th>"+
                         "</tr>");
                 }
+
+                $("#jump1").empty();
+                for (var i = 1; i <= data.totalPages; i++) {
+                    $("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+                }
+                $("#jump1").val(data.pageCurrentNo);
+
+                showHide();
             }
         }
     function dele(id,bit) {

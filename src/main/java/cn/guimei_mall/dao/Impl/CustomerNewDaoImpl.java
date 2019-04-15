@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
     @Override
-    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pageSize) {
+    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize) {
         List<CustomerNew> announcementList = new ArrayList<>();
         try {
             // 获取连接
@@ -31,7 +31,7 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
                 sql.append(" AND cusSex = "+sex);
             }
             sql.append(" limit ?,?");
-            Object[] p = {(pageCurrentNo-1)*pageSize,pageSize};
+            Object[] p = {(pageCurrentNo-1)*pagesize,pagesize};
             ResultSet rs = this.excuteSelect(sql.toString(),p);
 
             while (rs.next()){

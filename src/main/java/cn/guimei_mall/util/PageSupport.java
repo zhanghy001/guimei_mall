@@ -10,11 +10,11 @@ public class PageSupport {
     private int totalPages;   //总页数
     private List<?> list;
 
-    public int getPagesize() {
+    public int getpagesize() {
         return pagesize;
     }
 
-    public void setPagesize(int pagesize) {
+    public void setpagesize(int pagesize) {
         this.pagesize = pagesize;
     }
 

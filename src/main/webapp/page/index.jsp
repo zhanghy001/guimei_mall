@@ -23,9 +23,12 @@
                    ${User.userName}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a target="iframe_context" href="doUser?action=QueryById&id=${User.id}">查询个人信息</a></dd>
-                    <dd><a target="iframe_context" href="page/user/userUpdate.jsp">修改个人信息</a></dd>
-                    <dd><a target="iframe_context" href="doUser?action=userQueryById&id=${User.id}">修改密码</a></dd>
+                    <%--<dd><a target="iframe_context" href="doUser?action=QueryById&id=${User.id}">查询个人信息</a></dd>--%>
+                        <dd><a target="iframe_context" href="/page/user/userQuery.jsp">查询个人信息</a></dd>
+                        <dd><a target="iframe_context" href="/page/user/userUpdate.jsp">修改个人信息</a></dd>
+                        <dd><a target="iframe_context" href="/page/user/userUpdatePwd.jsp">修改密码</a></dd>
+
+                    <%--<dd><a target="iframe_context" href="doUser?action=userQueryById&id=${User.id}">修改密码</a></dd>--%>
                 </dl>
             </li>
             <li class="layui-nav-item"><a id="outPage" href="doUser?action=out" class="layui-icon ">&#x1007;</a></li>
@@ -46,8 +49,8 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;分类管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="doBig?action=bigQuery&pageNumber=1">大分类管理</a></dd>
-                        <dd><a target="iframe_context" href="doSmall?action=smallQuery&pageNumber=1">小分类管理</a></dd>
+                        <dd><a target="iframe_context" href="/page/bigclass/bigQuery.jsp">大分类管理</a></dd>
+                        <dd><a target="iframe_context" href="/page/smallclass/SmallQuery.jsp">小分类管理</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

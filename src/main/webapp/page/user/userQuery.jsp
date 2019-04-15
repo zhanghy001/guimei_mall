@@ -30,10 +30,11 @@
                 <tr>
                     <td>${User.id}</td>
                     <td>${User.userName}</td>
-                    <td>${User.userPassword}</td>
+                    <td>${User.userPassWord}</td>
+                    <%--<td>55</td>--%>
                     <td><img src="${User.userImage}" ></td>
                     <td>${User.userStatus}</td>
-                    <td>${User.userId}</td>
+                    <td>${User.userID}</td>
                     <td>${User.userLoginName}</td>
                 </tr>
             </c:forEach>
@@ -44,4 +45,10 @@
         </c:otherwise>
     </c:choose>
 </body>
+<%--<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>--%>
+<%--<script type="text/javascript">--%>
+
+    <%--alert(${User.userLoginName});--%>
+
+<%--</script>--%>
 </html>

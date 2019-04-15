@@ -8,7 +8,7 @@ public interface CustomerNewService {
     /**
      * 查询全部
      */
-    List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pageSize);
+    List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize);
     /**
      * 根据id查询
      */

@@ -59,7 +59,7 @@ public class DoOrder extends HttpServlet {
                     }
                 }
                 pageSupport.setTotalCount(rsCount);
-                pageSupport.setPagesize(1);
+                pageSupport.setpagesize(1);
                 pageSupport.setTotalPages(pageSupport.getTotalPages());
 
 
@@ -121,8 +121,8 @@ public class DoOrder extends HttpServlet {
         Object[] objects=new Object[3];
         PageSupport pageSupport=(PageSupport) httpSession.getAttribute("pageSupport");
         objects[0]=Id;
-        objects[1]=(pageSupport.getPageCurrentNo()-1)*pageSupport.getPagesize();
-        objects[2]=pageSupport.getPagesize();
+        objects[1]=(pageSupport.getPageCurrentNo()-1)*pageSupport.getpagesize();
+        objects[2]=pageSupport.getpagesize();
 
 
         List list=new LinkedList();

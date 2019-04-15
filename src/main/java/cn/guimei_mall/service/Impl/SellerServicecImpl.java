@@ -47,8 +47,8 @@ public class SellerServicecImpl implements SellerService {
     }
 
     @Override
-    public List<Seller> getNewsListBy(int sId, String selleruser, int pageCurrentNo, int pageSize) {
-        return sellerDao.getNewsListBy(sId,selleruser,pageCurrentNo,pageSize);
+    public List<Seller> getNewsListBy(int sId, String selleruser, int pageCurrentNo, int pagesize) {
+        return sellerDao.getNewsListBy(sId,selleruser,pageCurrentNo,pagesize);
     }
 
     @Override

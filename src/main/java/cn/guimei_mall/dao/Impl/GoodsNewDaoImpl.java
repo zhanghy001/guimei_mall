@@ -17,11 +17,11 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
     /**
      * 查询全部
      * @param pageCurrentNo
-     * @param pageSize
+     * @param pagesize
      * @return
      */
     @Override
-    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pageSize) {
+    public List<GoodsNew> getGoods(String goodName,int goodSeId,int goodSmalId,int pageCurrentNo, int pagesize) {
         List<GoodsNew> goodsList = new ArrayList<>();
         try {
             // 获取连接
@@ -45,7 +45,7 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
             }
 
             sql.append(" limit ?,?");
-            Object[] p = {(pageCurrentNo-1)*pageSize,pageSize};
+            Object[] p = {(pageCurrentNo-1)*pagesize,pagesize};
             ResultSet rs = this.excuteSelect(sql.toString(),p);
 
             while (rs.next()){
@@ -339,6 +339,38 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
         }
         return ire;
     }
+
+    public int getTotalCount(String goodsName, int goodsId, int smallId) {
+        int a = 0;
+        StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM `goods` g\n" +
+                "                INNER  JOIN `smallclass` sm ON g.goodsSmalId=sm.id\n" +
+                "                INNER JOIN `discount` d ON g.`goodsDiscId`=d.`id`\n" +
+                "                WHERE 1=1");
+        if (goodsId != -1) {
+            sql.append(" AND g.`goodsSeId`=" + goodsId);
+        }
+        if (smallId != -1) {
+            sql.append(" AND sm.`id`=" + smallId);
+        }
+        if (goodsName != null && goodsName != "") {
+            sql.append(" AND g.`goodsName` LIKE" + "'%" + goodsName + "%'");
+        }
+        Object[] params = {};
+        ResultSet rs = this.excuteSelect(sql.toString(), params);
+        try {
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.closeConn();
+        }
+        return a;
+    }
+
+
+
 
     /**
      * 分页

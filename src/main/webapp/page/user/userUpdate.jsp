@@ -17,9 +17,25 @@
 <form action="doUser?action=userUpdate" method="post">
     ID<input type="text" value="${User.id}" name="id" readonly>
     姓名<input type="text" value="${User.userName}" name="userName">
-    身份证号<input type="text" value="${User.userId}" name="userId">
+    身份证号<input type="text" value="${User.userID}" name="userID">
     登录名<input type="text" value="${User.userLoginName}" name="userLoginName">
-    <input type="submit" value="修改完成" class="layui-btn">
+    <input type="submit" value="修改完成" class="layui-btn"><br/>
+    <label id="err1"></label>
 </form>
 </body>
+<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var msg="${param.msg}";
+        if(msg.length>0){
+            if(msg=="0"){
+                $("#err1").html("修改成功").css("color","red");
+            }else if(msg==1) {
+                $("#err1").html("修改失败").css("color","red");
+            }
+        }
+    })
+</script>
+
+
 </html>

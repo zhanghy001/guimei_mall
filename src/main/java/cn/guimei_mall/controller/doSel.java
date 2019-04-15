@@ -43,7 +43,7 @@ public class doSel extends HttpServlet {
             int pageSize=Integer.parseInt(request.getParameter("pageSize"));
             List<Seller> newsList = newsService.getNewsListBy(0,null,(pageCurrentNo-1)*pageSize,pageSize);
             PageSupport pageSupport=new PageSupport();
-            pageSupport.setPagesize(pageSize);
+            pageSupport.setpagesize(pageSize);
             pageSupport.setPageCurrentNo(pageCurrentNo);
             pageSupport.setTotalCount(newsService.getTotalCount(0,null));
             pageSupport.setTotalPages(pageSupport.getTotalPages());

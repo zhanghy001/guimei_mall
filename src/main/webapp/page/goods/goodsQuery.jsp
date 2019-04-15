@@ -21,7 +21,7 @@
     <select name="smallName" id="smallName">
         <option value="-1">全部</option>
     </select>
-    <input class="layui-btn" type="button" value="查询" onclick="Goods()">
+    <input class="layui-btn" type="button" value="查询" onclick="selectList()">
 </form>
 
         <table width="100%" style="text-align: center" class="layui-table">
@@ -37,32 +37,32 @@
 
 <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
-    var pageCurrenNo = 1; // 当前页面
-    var pageSize = 5;  //  显示页面
+    // var pageCurrentNo = 1; // 当前页面
+    // var pagesize = 5;  //  显示页面
     $(function () {
         // 首页
         $("#begin").click(function () {
-            pageCurrenNo = 1;
+            pageCurrentNo = 1;
             Goods();
         });
         //  上一页
         $("#prev").click(function () {
-            pageCurrenNo =pageCurrenNo - 1;
+            pageCurrentNo =pageCurrentNo - 1;
             Goods();
         });
         //  下一页
         $("#next").click(function () {
-            pageCurrenNo =pageCurrenNo + 1;
+            pageCurrentNo =pageCurrentNo + 1;
             Goods();
         });
         //  末页
         $("#end").click(function () {
-            pageCurrenNo = $("#totalPages").html();
+            pageCurrentNo = $("#totalPages").html();
             Goods();
         });
         //  转跳
         $("#page-btn").click(function () {
-            pageCurrenNo = $("#inputPage").val();
+            pageCurrentNo = $("#inputPage").val();
             Goods();
         });
         Goods();
@@ -71,6 +71,29 @@
 
     });
 
+    function selectList() {
+        pageCurrentNo=1;
+        Goods();
+    }
+    function jump() {
+        pageCurrentNo= $("#jump1").val();
+        Goods();
+    }
+
+
+    //判断页码 显示 隐藏
+    function showHide() {
+        if (pageCurrentNo==$("#totalPages").html() ||$("#totalPages").html()==0) {
+            $("#next").hide();
+        }else {
+            $("#next").show();
+        }
+        if (pageCurrentNo==1){
+            $("#prev").hide();
+        }else {
+            $("#prev").show();
+        }
+    }
     /**
      * 商品名下拉框
      */
@@ -114,7 +137,7 @@
         var sellerName = $("#sellerName").val();
         var smallName = $("#smallName").val();
 
-        $.getJSON("/GoodsNewServlet",{"action":"select","pageCurrenNo":pageCurrenNo,"pageSize":pageSize,"goodName":goodName,"sellerName":sellerName,"smallName":smallName},callback);
+        $.getJSON("/GoodsNewServlet",{"action":"select","pageCurrentNo":pageCurrentNo,"pagesize":pagesize,"goodName":goodName,"sellerName":sellerName,"smallName":smallName},callback);
         function callback(data) {
             $("#pageNo").html(data.pageCurrentNo);
             $("#totalPages").html(data.totalPages);
@@ -135,6 +158,13 @@
                     "</th>"+
                     "</tr>");
             }
+            showHide();
+            $("#jump1").empty();
+            for (var i = 1; i <= data.totalPages; i++) {
+                $("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+            }
+            $("#jump1").val(data.pageCurrentNo);
+
         }
     }
     function dele(id,bit) {

@@ -72,7 +72,7 @@
       
   	$(function(){
 		var pageNum=1;/* 当前页 */
-		var pageSize=9;/* 每页行数 */
+		var pagesize=9;/* 每页行数 */
 		var totalPage=0;/* 总页数 */ 
 		var Path="../servlet/goodsManagerServlet";
 		var action="goodsManagerVagueQurey";
@@ -81,7 +81,7 @@
 			/* 拖动页面的实现方法 */
 			$("[ type='range']").change(function(){
 				pageNum=$("[type='range']").val();
-				url = Path+"?action="+action+"&pageNum="+pageNum+"&pageSize="+pageSize+"&value="+value;
+				url = Path+"?action="+action+"&pageNum="+pageNum+"&pagesize="+pagesize+"&value="+value;
 				show(url);
 			});
 
@@ -89,7 +89,7 @@
 		/* 公告栏 请求 */
 	  		function announshow() {
 			$.post(
-				"../servlet/annManagerServlet?action=annManagerVagueQurey&pageNum=1&pageSize=3&value=",
+				"../servlet/annManagerServlet?action=annManagerVagueQurey&pageNum=1&pagesize=3&value=",
 				function(json){
 					$.each(json.page.data,function(index,value){
 						$("#announ").append("<marquee direction=left scrollamount=6><b style='color:red;'>"+value.a_title+"</b>&nbsp;"+value.a_text+"</marquee><br/>");
@@ -110,23 +110,23 @@
 					$.each(json,function(index,value){
 						if(a<16){
 							$("#class_4_small").append("<div><a href='../servlet/goodsManagerServlet?"+
-							"action=queryGoodsByClassid&pageNum=1&pageSize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
+							"action=queryGoodsByClassid&pageNum=1&pagesize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
 							a++;
 						}
 						
 						if(a>16&&a<32){
 							$("#class_3_small").append("<div><a href='../servlet/goodsManagerServlet?"+
-							"action=queryGoodsByClassid&pageNum=1&pageSize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
+							"action=queryGoodsByClassid&pageNum=1&pagesize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
 							a++;
 						}
 						if(a>32&&a<48){
 							$("#class_2_small").append("<div><a href='../servlet/goodsManagerServlet?"+
-							"action=queryGoodsByClassid&pageNum=1&pageSize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
+							"action=queryGoodsByClassid&pageNum=1&pagesize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
 							a++;
 						}
 						if(a>48&&a<64){
 							$("#class_1_small").append("<div><a href='../servlet/goodsManagerServlet?"+
-							"action=queryGoodsByClassid&pageNum=1&pageSize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
+							"action=queryGoodsByClassid&pageNum=1&pagesize=5&g_sm_id="+value.sm_s_id+"'>"+value.sm_s_name+"</a></div>");
 							a++;
 						}
 						if(a==16){$("#class_4_big").html(value.sm_b_name);a++;}
@@ -151,7 +151,7 @@
 	    			pageNum++;
 	    		}
 			
-			url = Path+"?action="+action+"&pageNum="+pageNum+"&pageSize="+pageSize+"&value="+value;
+			url = Path+"?action="+action+"&pageNum="+pageNum+"&pagesize="+pagesize+"&value="+value;
 			show(url);
 			Stoptime=setTimeout(goodsCycle,5000);
 			}
@@ -188,7 +188,7 @@
 			State=4;
 		}
 		
-		var url = Path+"?action="+action+"&pageNum="+pageNum+"&pageSize="+pageSize+"&value="+value;
+		var url = Path+"?action="+action+"&pageNum="+pageNum+"&pagesize="+pagesize+"&value="+value;
 		
 		setTimeout(announshow,500); 
 		
