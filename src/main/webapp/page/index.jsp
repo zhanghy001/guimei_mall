@@ -63,7 +63,7 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;公告管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="doAn?action=anQuery&pageNumber=1">查询公告</a></dd>
+                        <dd><a target="iframe_context" href="page/announcement/anQuery.jsp">查询公告</a></dd>
                         <dd><a target="iframe_context" href="page/announcement/anAdd.jsp">添加公告</a></dd>
                     </dl>
                 </li>
