@@ -38,7 +38,8 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;商品管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="Seller/goodsQuery.jsp">查询商品</a></dd>
+                        <%--sellerId--%>
+                        <dd><a target="iframe_context" href="Seller/goodsQuery.jsp?sllerNa=${seller.sellerName}&sellerId=${seller.sellerId}">查询商品</a></dd>
                         <dd><a target="iframe_context" href="Seller/goodsAdd.jsp">添加商品</a></dd>
                     </dl>
                 </li>

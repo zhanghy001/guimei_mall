@@ -10,24 +10,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
+public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao{
     @Override
-    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize) {
+    public List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize) {
         List<CustomerNew> announcementList = new ArrayList<>();
         try {
             // 获取连接
             this.getConn();
             //返回结果
 
-            StringBuffer sql = new StringBuffer("SELECT `id`,`cusName`,`cusLoginName`,`cusEmail`,`cusSex`,`cusPhoto`,`cusHobby`,`cusCode`,`cusBirthday` FROM `customer`");
-            if (cid != "" && cid != null){
-                sql.append(" AND id = "+Integer.parseInt(cid));
+            StringBuffer sql = new StringBuffer("SELECT * FROM `customer` WHERE 1=1 ");
+            if (cid != 0){
+                sql.append(" AND id = "+cid);
             }
-            if (name != "" && name != null){
+            if (name.trim().length() != 0){
                 sql.append(" AND cusName = "+name);
             }
 
-            if (sex != "" && sex != null){
+            if (sex.trim().length() != 0){
                 sql.append(" AND cusSex = "+sex);
             }
             sql.append(" limit ?,?");
@@ -40,7 +40,7 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
                 int id = rs.getInt("id");
                 String cusName = rs.getString("cusName");
                 String cusLoginName = rs.getString("cusLoginName");
-
+                String cusPassword = rs.getString("cusPassword");
                 String cusEmail = rs.getString("cusEmail");
                 String cusSex = rs.getString("cusSex");
                 String cusPhoto = rs.getString("cusPhoto");
@@ -199,5 +199,45 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
 
         }
         return totalCount;
+    }
+
+    /**
+     * 根据条件获得页数
+     * @param cid
+     * @param name
+     * @param sex
+     * @return
+     */
+    @Override
+    public int getTotalCount(int cid, String name, String sex) {
+        int count = 0;
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM `customer` WHERE 1=1 ");
+            if (cid != 0){
+                sql.append(" AND id = "+cid);
+            }
+            if (name != "" && name != null){
+                sql.append(" AND cusName = "+name);
+            }
+
+            if (sex != "" && sex != null){
+                sql.append(" AND cusSex = "+sex);
+            }
+            Object[] p = {};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return count;
     }
 }

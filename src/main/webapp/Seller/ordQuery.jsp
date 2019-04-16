@@ -96,6 +96,14 @@
                 "                <th colspan=\"2\">操作</th>");
 
             for (var i = 0; i <data.list.length ;i++) {
+                var orderseStatus = "";
+                if (data.list[i].orderseStatus==0) {
+                    orderseStatus = "卖家未发货";
+                }else if (data.list[i].orderseStatus==1) {
+                    orderseStatus = "卖家未发货";
+                }else {
+                    orderseStatus = "已收货";
+                }
                 $("tbody").append("<tr>" +
                     "<td>"+data.list[i].id+"</td>" +
                     "<td>"+data.list[i].goods.goodsName+"</td>" +
@@ -103,9 +111,9 @@
                     "<td>"+data.list[i].orderseDate+"</td>" +
                     "<td>"+data.list[i].orderseAddress+"</td>" +
                     "<td>"+data.list[i].orderseMoney+"</td>" +
-                    "<td>"+data.list[i].orderseStatus+"</td>" +
+                    "<td>"+orderseStatus+"</td>" +
                     "<td>" +
-                    "<a href='javascript:void(0)' onclick='updateNews("+data.list[i].id+")'>编辑</a>" +
+                    "<a href='javascript:void(0)' onclick='updateNews("+data.list[i].id+")' class=\"layui-btn\" >编辑</a>" +
                     "</td>" +
                     "</tr>");
             }

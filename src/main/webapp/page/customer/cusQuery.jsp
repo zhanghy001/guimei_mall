@@ -10,11 +10,11 @@
 
     <form action="" method="post" >
         <label>ID</label>
-        <input type="text" name="id" value=" ">
+        <input type="text" name="id" id="id" value="">
         <label>姓名</label>
-        <input type="text" name="cusName" value=" ">
+        <input type="text" name="cusName" id="cusName" value="">
         <label>姓别</label>
-        <input type="text" name="cusSex" value=" ">
+        <input type="text" name="cusSex" id="cusSex"  value="">
         <input class="layui-btn" type="button" value="查询" onclick="Announce()">
     </form>
 
@@ -22,13 +22,13 @@
             <table width="100%" style="text-align: center" class="layui-table">
 
 
-                <tr>
-                    <td colspan="10">
-                        <%@include file="../Page.jsp"%>
-                    </td>
-                </tr>
-            </table>
 
+            </table>
+    <tr>
+        <td colspan="10">
+            <%@include file="../Page.jsp"%>
+        </td>
+    </tr>
     <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
     <script type="text/javascript">
         var pageCurrentNo = 1; // 当前页面
@@ -101,6 +101,33 @@
                         "</th>"+
                         "</tr>");
                 }
+                showHide();
+                $("#jump1").empty();
+                for (var i = 1; i <= data.totalPages; i++) {
+                    $("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+                }
+                $("#jump1").val(data.pageCurrentNo);
+            }
+        }
+        function selectList() {
+            pageCurrentNo=1;
+            Announce();
+        }
+        function jump() {
+            pageCurrentNo= $("#jump1").val();
+            Announce();
+        }
+        //判断页码 显示 隐藏
+        function showHide() {
+            if (pageCurrentNo==$("#totalPages").html() ||$("#totalPages").html()==0) {
+                $("#next").hide();
+            }else {
+                $("#next").show();
+            }
+            if (pageCurrentNo==1){
+                $("#prev").hide();
+            }else {
+                $("#prev").show();
             }
         }
         function update(id) {

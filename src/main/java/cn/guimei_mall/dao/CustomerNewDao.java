@@ -10,7 +10,7 @@ public interface CustomerNewDao {
     /**
      * 查询全部
      */
-    List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize);
+    List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize);
     /**
      * 根据id查询
      */
@@ -31,4 +31,8 @@ public interface CustomerNewDao {
      * 分页
      */
     int getTotalCount();
+    /**
+     * 查询总条数
+     */
+    int getTotalCount(int custId,String custName,String custSex);
 }

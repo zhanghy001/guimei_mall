@@ -75,7 +75,10 @@ public class OrdDaoImpl extends BaseDao implements OrdDao {
         int totalCount = 0;
             try {
                 //创建statument执行sql
-                StringBuffer sql = new StringBuffer("select COUNT(*) from `seller` where 1=1 ");
+                StringBuffer sql = new StringBuffer("SELECT COUNT(*)\" +\n" +
+                        "        FROM `orderse` o " +
+                        "        INNER JOIN `goods` g ON o.`orderseGoodsId` = g.`id`" +
+                        "        INNER JOIN `customer` c ON o.`orderseCusId`=c.`id` ");
                 Object[] params = {};
                 rs = this.excuteSelect(sql.toString(), params);
                 while (rs.next()) {

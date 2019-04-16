@@ -11,7 +11,6 @@
 <head>
     <meta charset="UTF-8">
     <title>贵美登录</title>
-    <script src="static/js/jquery-2.1.1.min.js"></script>
     <%--css样式--%>
     <style>
         body{
@@ -69,54 +68,7 @@
             top: -70px;
         }
     </style>
-    <%--登录操作--%>
-    <script>
-        $(function () {
-            var nameSta=false;
-            var pwdSta=false;
-            $(".core4").click(function () {
-                if($(".core1").val().trim()==""){
-                    $(".lab1").html("账号不完整");
-                    nameSta=false;
-                }else {
-                    nameSta=true;
-                    $(".lab1").html("");
-                }
-                if($(".core2").val().trim()==""){
-                    $(".lab2").html("密码不完整");
-                    pwdSta=false;
-                }else {
-                    pwdSta=true;
-                    $(".lab2").html("");
-                }
-                if(nameSta && pwdSta){
-                    var userLoginName=$(".core1").val();
-                    var userPassword=$(".core2").val();
-                    if($(".core3 [type=radio]:checked").val()=="商家"){
-                        $.getJSON("/doSel",{"action":"sellerLogin","userLoginName":userLoginName,"userPassword":userPassword},callback);
-                       function callback(data) {
-                           if(data.sellerName==null || data.sellerName==""){
-                               alert("用户名或密码不正确");
-                           }else {
-                               location.href="/Seller/index.jsp";
-                           }
-                       }
-                    }
-                    if($(".core3 [type=radio]:checked").val()=="管理员"){
-                        $(".move").prop("action","doUser?action=userLogin")
-                    }
-                }
-            })
-            //     $(".core4").click(function () {
-            //         for(var i=0 ;i<$(".core3 [type=radio]").length;i++){
-            //             if($(".core3 [type=radio]")[i].checked==true){
-            //                 alert($(".core3 [type=radio]")[i])
-            //             }
-            //         }
-            //         alert($(".core3 [type=radio]:checked").val())
-            //     })
-        })
-    </script>
+
 </head>
 <body>
 <div class="main">
@@ -153,5 +105,51 @@
           }
       }
   })*/
+  <%--登录操作--%>
+  $(function () {
+      var nameSta=false;
+      var pwdSta=false;
+      $(".core4").click(function () {
+          if($(".core1").val().trim()==""){
+              $(".lab1").html("账号不完整");
+              nameSta=false;
+          }else {
+              nameSta=true;
+              $(".lab1").html("");
+          }
+          if($(".core2").val().trim()==""){
+              $(".lab2").html("密码不完整");
+              pwdSta=false;
+          }else {
+              pwdSta=true;
+              $(".lab2").html("");
+          }
+          if(nameSta && pwdSta){
+              var userLoginName=$(".core1").val();
+              var userPassword=$(".core2").val();
+              if($(".core3 [type=radio]:checked").val()=="商家"){
+                  $.getJSON("/doSel",{"action":"sellerLogin","userLoginName":userLoginName,"userPassword":userPassword},callback);
+                  function callback(data) {
+                      if(data.sellerName==null || data.sellerName==""){
+                          alert("用户名或密码不正确");
+                      }else {
+                          location.href="/Seller/index.jsp";
+                      }
+                  }
+              }
+              if($(".core3 [type=radio]:checked").val()=="管理员"){
+                  $(".move").prop("action","doUser?action=userLogin&userLoginName="+userLoginName+"&userPassword="+userPassword);
+              }
+          }
+      })
+      //     $(".core4").click(function () {
+      //         for(var i=0 ;i<$(".core3 [type=radio]").length;i++){
+      //             if($(".core3 [type=radio]")[i].checked==true){
+      //                 alert($(".core3 [type=radio]")[i])
+      //             }
+      //         }
+      //         alert($(".core3 [type=radio]:checked").val())
+      //     })
+  })
 </script>
 </html>

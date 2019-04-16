@@ -14,7 +14,8 @@
     <input type="text" name="goodsName" id="goodsName" value="">
     <label>商家名称</label>
     <select name="sellerName" id="sellerName">
-        <option value="-1">全部</option>
+        <%--<%=request.getParameter("sller")%>--%>
+        <option value="<%=request.getParameter("sellerId")%>" name="sellernamesele"><%=request.getParameter("sllerNa")%></option>
     </select>
     <label>小分类名称</label>
     <select name="smallName" id="smallName">
@@ -61,9 +62,10 @@
             Goods();
         });
         Goods();
-        getSellerName();
+        //getSellerName();
         getsmall();
-
+        <%--var sller = '${param.sller}';--%>
+        <%--$("#sellerName").find("option[text='"+sller+"']").attr("selected",true);--%>
     });
 
     function selectList() {
@@ -96,7 +98,7 @@
         $.getJSON("/GoodsNewServlet",{"action":"selectSell"},callback);
         function callback(data) {
             $(data).each(function () {
-                $("#sellerName").append("<option value=" + this.id + ">" + this.goodsSeName + "</option>");
+                $("#sellerName").append("<option value=" + this.id + " name='sellernamesele' >" + this.goodsSeName + "</option>");
             })
         }
     }
@@ -125,6 +127,7 @@
             "                <th>商品的类型</th>\n" +
             "                <th>商家名称</th>\n" +
             "                <th>商品的折扣</th>\n" +
+            "                <th colspan=\"2\">操作</th>\n" +
             "            </tr>");
 
         var goodName = $("#goodsName").val();
@@ -147,6 +150,9 @@
                     "<td>${data.list[i].goodsType==0?'新品':'二手'}</td>" +
                     "<td>"+data.list[i].goodsSeName+"</td>" +
                     "<td>"+data.list[i].goodsDiscRate+"</td>" +
+                    " <th ><a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +
+                    " <a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='dele("+data.list[i].id+",this)'>删除</a>" +
+                    "</th>"+
                     "</tr>");
             }
             showHide();
@@ -170,7 +176,9 @@
             }
         }
     }
-
+    function update(id) {
+        location.href = "Seller/goodsUpdate.jsp?id="+id;
+    }
 </script>
 </body>
 </html>
