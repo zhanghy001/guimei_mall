@@ -22,18 +22,21 @@
 	                <td style="width:8%;">数量</td>
 	            </tr>
         	</thead>
-			 <c:forEach items="${Page.pageData}" var="all">
-				 <tr>
-					 <td style="width:36%;text-align:left;"> <a  href="doGoods?action=goodsLookByIg&id=${all.goods.id}" >
-						 <img src="GoodsImage/${all.goods.goodsImage}" style="width: 80px;height: 80px" ></a></td>
-					 <td style="width:20%;">${all.goods.goodsName}<br>出售者：${all.seller.sellerName}</td>
-					 <td style="width:8%;">一口价<br>${all.goods.goodsMoney}</td>
-					 <td style="width:8%;">${all.goods.goodsNumber}</td>
-				 </tr>
-			 </c:forEach>
+			<tbody id="goodsList">
+			<%--<tr>--%>
+				<%--<td style="width:36%;text-align:left;"> <a  href="doGoods?action=goodsLookByIg&id=1" >--%>
+					<%--<img src="GoodsImage/A1.jpg" style="width: 80px;height: 80px" ></a></td>--%>
+				<%--<td style="width:20%;">natun<br>出售者：natun</td>--%>
+				<%--<td style="width:8%;">一口价<br>456</td>--%>
+				<%--<td style="width:8%;">123</td>--%>
+			<%--</tr>--%>
+
+			</tbody>
+
+			 <%--action=goodsBySmall&pageNumber=1&--%>
 			 <tr>
 				 <td colspan="4">
-					 <%@include file="Page.jsp"%>
+					 <%@include file="../../page/Page.jsp"%>
 				 </td>
 			 </tr>
         	<tbody id="shoppingcar"></tbody>
@@ -41,4 +44,94 @@
 
     </div>
 </body>
+
+<script type="text/javascript">
+
+	var smallId=${param.smallId};
+
+	$(function () {
+		// 首页
+		$("#begin").click(function () {
+			pageCurrentNo = 1;
+			getSmallListById();
+		});
+		//  上一页
+		$("#prev").click(function () {
+			pageCurrentNo =pageCurrentNo - 1;
+			getSmallListById();
+		});
+		//  下一页
+		$("#next").click(function () {
+			pageCurrentNo =pageCurrentNo + 1;
+			getSmallListById();
+		});
+		//  末页
+		$("#end").click(function () {
+			pageCurrentNo = $("#totalPages").html();
+			getSmallListById();
+		});
+		//  转跳
+		$("#page-btn").click(function () {
+			pageCurrentNo = $("#inputPage").val();
+			getSmallListById();
+		});
+
+		getSmallListById();
+
+	})
+
+	//跳页
+	function jump() {
+		pageCurrentNo= $("#jump1").val();
+		getSmallListById();
+	}
+
+	//判断页码 显示 隐藏
+	function showHide() {
+		if (pageCurrentNo==$("#totalPages").html() ||$("#totalPages").html()==0) {
+			$("#next").hide();
+		}else {
+			$("#next").show();
+		}
+		if (pageCurrentNo==1){
+			$("#prev").hide();
+		}else {
+			$("#prev").show();
+		}
+	}
+
+
+
+
+
+	function getSmallListById() {
+		$("#goodsList").empty();
+		$.getJSON("/GoodsNewServlet",{"action":"select","pageCurrentNo":pageCurrentNo,"pagesize":pagesize,"goodName":"","sellerName":-1,"smallName":smallId},callback);
+		function callback(data) {
+			$("#pageNo").html(data.pageCurrentNo);
+			$("#totalPages").html(data.totalPages);
+			for (var i = 0; i<data.list.length ; i++) {
+				$("#goodsList").append("<tr>\n" +
+						"<td style=\"width:36%;text-align:left;\"> <a  href='doGoods?action=goodsLookByIg&id="+data.list[i].id+" ' >\n" +
+						"<img src='GoodsImage/"+data.list[i].goodsImage+"' style=\"width: 80px;height: 80px\" ></a></td>\n" +
+						"<td style=\"width:20%;\">"+data.list[i].goodsName+"<br>出售者："+data.list[i].goodsSeName+"</td>\n" +
+						"<td style=\"width:8%;\">一口价<br>"+data.list[i].goodsMoney+"</td>\n" +
+						"<td style=\"width:8%;\">"+data.list[i].goodsNumber+"</td>\n" +
+						"</tr>")
+
+
+			}
+			showHide();
+			$("#jump1").empty();
+			for (var i = 1; i <= data.totalPages; i++) {
+				$("#jump1").append("<option  value=" + i + ">第" + i + "页</option>");
+			}
+			$("#jump1").val(data.pageCurrentNo);
+
+		}	}
+
+
+
+</script>
+
 </html>

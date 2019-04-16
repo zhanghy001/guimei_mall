@@ -105,6 +105,14 @@ public class doSmallClassServlet extends HttpServlet {
             }
 
         }
+        if("smallQueryByBigId".equals(action)){
+            int bigId= Integer.parseInt(request.getParameter("bigId"));
+            List<SmallClass> smallClassList=sus.getSmllListBy("",bigId,1,1000);
+            String smallJson= JSON.toJSONString(smallClassList);
+            out.print(smallJson);
+            out.flush();
+            out.close();
+        }
 
 
     }

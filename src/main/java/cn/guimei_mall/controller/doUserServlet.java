@@ -1,6 +1,4 @@
 package cn.guimei_mall.controller;
-
-import cn.guimei_mall.entity.BigClass;
 import cn.guimei_mall.entity.SuperUser;
 import cn.guimei_mall.service.Impl.SuperUserServiceImpl;
 import cn.guimei_mall.service.SuperUserService;

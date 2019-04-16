@@ -60,4 +60,6 @@ public interface SuperUserDao {
     //根据id修改小分类
     boolean updateSmallById(int id,String smallName,int smallBigId,String smallText);
 
+
+
 }

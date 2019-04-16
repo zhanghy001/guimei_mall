@@ -18,7 +18,7 @@
                 dataType:"json",
                 success:function (list) {
                     $.each(list,function (index,all) {
-                        $("#class_1_small").append("<div><a href='doGoods?action=goodsBySmall&pageNumber=1&id="+all.id+"'>"+all.smallName+"</a></div>")
+                        $("#class_1_small").append("<div><a href='/BeforePage/GUIMEI/dianzichangping.jsp?smallId="+all.id+"'>"+all.smallName+"</a></div>")
                     })
                 }
             })
@@ -29,7 +29,7 @@
                 dataType:"json",
                 success:function (list) {
                     $.each(list,function (index,all) {
-                        $("#class_2_small").append("<div><a href='doGoods?action=goodsBySmall&pageNumber=1&id="+all.id+"'>"+all.smallName+"</a></div>")
+                        $("#class_2_small").append("<div><a href='/BeforePage/GUIMEI/dianzichangping.jsp?smallId="+all.id+"'>"+all.smallName+"</a></div>")
                     })
                 }
             })
@@ -40,7 +40,7 @@
                 dataType:"json",
                 success:function (list) {
                     $.each(list,function (index,all) {
-                        $("#class_3_small").append("<div><a href='doGoods?action=goodsBySmall&pageNumber=1&id="+all.id+"'>"+all.smallName+"</a></div>")
+                        $("#class_3_small").append("<div><a href='/BeforePage/GUIMEI/dianzichangping.jsp?smallId="+all.id+"'>"+all.smallName+"</a></div>")
                     })
                 }
             })
@@ -51,7 +51,7 @@
                 dataType:"json",
                 success:function (list) {
                     $.each(list,function (index,all) {
-                        $("#class_4_small").append("<div><a href='doGoods?action=goodsBySmall&pageNumber=1&id="+all.id+"'>"+all.smallName+"</a></div>")
+                        $("#class_4_small").append("<div><a href='/BeforePage/GUIMEI/dianzichangping.jsp?smallId="+all.id+"'>"+all.smallName+"</a></div>")
                     })
                 }
             })
@@ -64,9 +64,6 @@
             $(".a_login").hide();
 
         }
-
-
-
         })
     </script>
 </head>

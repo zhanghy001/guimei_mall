@@ -110,18 +110,18 @@
         <hr>
     </div>
     <div id="info_shangtu">
-        <iframe id="ifa"  src="GoodsImage/${All.goods.goodsImage}"  width="345px" height="250" frameborder="no" scrolling="no"  name="shangtu1" class="infoimg"></iframe>
+        <iframe id="ifa"  src="GoodsImage/${All.goodsImage}"  width="345px" height="250" frameborder="no" scrolling="no"  name="shangtu1" class="infoimg"></iframe>
         <dl>
         <a href="#"><img src="../../images/img/images/share.gif"></a>
         <a href="#"><img id="infoimgsc" src="../../images/img/images/favthis.gif"></a>
         </dl>
     </div>
     <div id="info_changshu" style="margin-left:150px;"  >
-        <p>价格：<label id="g_money"></label>${All.goods.goodsMoney}元</p>
+        <p>价格：<label id="g_money"></label>${All.goodsMoney}元</p>
         <hr>
-        <p>运费：<label id="g_carriage"></label>${All.goods.goodsCarriage}元</p>
+        <p>运费：<label id="g_carriage"></label>${All.goodsCarriage}元</p>
         <hr>
-        <a href="doShop?action=shopAdd&pageNumber=1&id=${All.goods.id}"><img id="infoimg1" src="images/img/images/buynow.gif"></a>
+        <a href="doShop?action=shopAdd&pageNumber=1&id=${All.id}"><img id="infoimg1" src="images/img/images/buynow.gif"></a>
         <dl>
             <dt><img src="../../images/img/images/onlinepay.gif"></dt>
             <dd>此商品支持网银支付，网上汇款免手续费。收货满意后出售者才能拿钱，货款都安全！</dd>
@@ -135,7 +135,7 @@
         <p id="info_changshu_left1">商品类型：${All.smallName}<label id="g_type"></label>&nbsp;</p>
         <p id="info_changshu_right1">所在地：<label id="">浙江</label></p><br style="clear: left">
         <hr>
-        <p id="info_changshu_left2">商品数量：${All.goods.goodsNumber}<label id="g_number"></label>件</p>
+        <p id="info_changshu_left2">商品数量：${All.goodsNumber}<label id="g_number"></label>件</p>
         <p id="info_changshu_right2">访问数：<label id="">10231</label>次</p>
     </div>
  </div>
