@@ -105,8 +105,6 @@
                     +"</tr>");
             }
 
-
-          //  $("#total").html(data.newsCount);
             $("#pageNo").empty();
             $("#pageNo").append(data.pageCurrentNo);
             $("#totalPages").empty();
