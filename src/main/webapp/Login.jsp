@@ -93,18 +93,6 @@
 </body>
 <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript" >
-  /*$(function () {
-      var LoginName=$("#userLoginName").val();
-      var LoginPwd=$("#userPassword").val();
-      $.getJSON("/doSel",{"action":"login","LoginName":LoginName,"LoginPwd":LoginPwd},callback)
-      function callback(data) {
-          if(data.flag=="true"){
-
-          }else {
-              alert("");
-          }
-      }
-  })*/
   <%--登录操作--%>
   $(function () {
       var nameSta=false;

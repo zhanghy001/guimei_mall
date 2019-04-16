@@ -10,7 +10,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao{
+public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
+    @Override
+    public CustomerNew cusLogin(String cusLoName, String passWord) {
+        CustomerNew cn = new CustomerNew();
+        try {
+            String sql="SELECT * FROM `customer` WHERE `cusLoginName` = ? AND `cusPassword` = ? ";
+            Object[] params={cusLoName,passWord};
+            ResultSet rs=this.excuteSelect(sql,params);
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String cusName = rs.getString("cusName");
+                String cusLoginName = rs.getString("cusLoginName");
+                String cusPassword = rs.getString("cusPassword");
+                String cusEmail = rs.getString("cusEmail");
+                String cusSex = rs.getString("cusSex");
+                String cusPhoto = rs.getString("cusPhoto");
+                String cusHobby = rs.getString("cusHobby");
+                String cusCode = rs.getString("cusCode");
+                Date cusBirthday = rs.getTimestamp("cusBirthday");
+                cn.setId(id);
+                cn.setCusName(cusName);
+                cn.setCusLoginName(cusLoginName);
+                cn.setCusPassword(cusPassword);
+                cn.setCusEmail(cusEmail);
+                cn.setCusSex(cusSex);
+                cn.setCusPhoto(cusPhoto);
+                cn.setCusHobby(cusHobby);
+                cn.setCusCode(cusCode);
+                cn.setCusBirthday(cusBirthday);
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.closeConn();
+        }
+        return cn;
+    }
+
     @Override
     public List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize) {
         List<CustomerNew> announcementList = new ArrayList<>();
@@ -50,7 +88,7 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao{
                 cn.setId(id);
                 cn.setCusName(cusName);
                 cn.setCusLoginName(cusLoginName);
-
+                cn.setCusPassword(cusPassword);
                 cn.setCusEmail(cusEmail);
                 cn.setCusSex(cusSex);
                 cn.setCusPhoto(cusPhoto);
