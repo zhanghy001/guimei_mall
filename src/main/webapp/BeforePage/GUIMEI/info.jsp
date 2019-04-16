@@ -105,7 +105,7 @@
 <%@include file="head.jsp"%>
 <div style="width:980px;height:450px;margin: auto">
     <div id="info_biaoti" style="text-align: center">
-        ${All.goods.goodsName}
+        ${All.goodsName}
         <h2 id="g_name" style="color:red;"></h2>
         <hr>
     </div>
@@ -132,7 +132,7 @@
         <hr>
         <p>累计出售：<label id="">4532</label>件</p>
         <hr>
-        <p id="info_changshu_left1">商品类型：${All.smallName}<label id="g_type"></label>&nbsp;</p>
+        <p id="info_changshu_left1">商品类型：${All.goodsSmallName}<label id="g_type"></label>&nbsp;</p>
         <p id="info_changshu_right1">所在地：<label id="">浙江</label></p><br style="clear: left">
         <hr>
         <p id="info_changshu_left2">商品数量：${All.goodsNumber}<label id="g_number"></label>件</p>

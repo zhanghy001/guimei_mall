@@ -112,7 +112,7 @@
 			$("#totalPages").html(data.totalPages);
 			for (var i = 0; i<data.list.length ; i++) {
 				$("#goodsList").append("<tr>\n" +
-						"<td style=\"width:36%;text-align:left;\"> <a  href='doGoods?action=goodsLookByIg&id="+data.list[i].id+" ' >\n" +
+						"<td style=\"width:36%;text-align:left;\"> <a  href='GoodsNewServlet?action=goodsLookByIg&id="+data.list[i].id+" ' >\n" +
 						"<img src='GoodsImage/"+data.list[i].goodsImage+"' style=\"width: 80px;height: 80px\" ></a></td>\n" +
 						"<td style=\"width:20%;\">"+data.list[i].goodsName+"<br>出售者："+data.list[i].goodsSeName+"</td>\n" +
 						"<td style=\"width:8%;\">一口价<br>"+data.list[i].goodsMoney+"</td>\n" +
