@@ -8,6 +8,15 @@ import java.util.List;
 
 public interface CustomerNewDao {
     /**
+     * 登陆
+     * @param cusLoginName
+     * @param passWord
+     * @return
+     */
+    CustomerNew cusLogin(String cusLoginName,String passWord);
+
+
+    /**
      * 查询全部
      */
     List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize);

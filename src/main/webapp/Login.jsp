@@ -11,7 +11,6 @@
 <head>
     <meta charset="UTF-8">
     <title>贵美登录</title>
-    <script src="static/js/jquery-2.1.1.min.js"></script>
     <%--css样式--%>
     <style>
         body{

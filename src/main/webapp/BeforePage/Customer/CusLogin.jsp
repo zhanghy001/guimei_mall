@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="wrap">
-    <form action="../doCus?action=cusLogin" method="post">
+    <form action="/CustomerNewServlet?action=cusLogin" method="post">
         <div class="d1">
             <img src="../../static/Image/logog.jpg" class="d6">
             <div class="d5">您好，欢迎光临贵美商城！
@@ -56,5 +56,18 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" >
+    <%--登录操作--%>
+    $(function () {
+        var msg="${param.msg}";
+        if(msg.length>0){
+            if(msg=="1"){
+                alert("登陆失败")
+            }
+        }
+    })
+</script>
 </body>
 </html>

@@ -14,6 +14,11 @@ public class CustomerNewServiceImpl implements CustomerNewService {
     }
 
     @Override
+    public CustomerNew cusLogin(String cusLoginName, String passWord) {
+        return customerNewDao.cusLogin(cusLoginName,passWord);
+    }
+
+    @Override
     public List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize) {
         return customerNewDao.getCustomerNew(cid,name,sex,pageCurrentNo,pagesize);
     }

@@ -26,6 +26,26 @@ public class CustomerNewServlet extends HttpServlet {
         CustomerNewService customerNewService = new CustomerNewServiceImpl();
         String action = request.getParameter("action");
         PrintWriter out = response.getWriter();
+
+        /**
+         *  登陆用
+         */
+        if ("cusLogin".equals(action)){
+            String cusLoginName=request.getParameter("cusLoginName");
+            String cusPassword=request.getParameter("cusPassword");
+            CustomerNew customerNew = customerNewService.cusLogin(cusLoginName,cusPassword);
+            if (cusLoginName.equals(customerNew.getCusLoginName())){
+                request.getSession().setAttribute("customer",customerNew);
+                request.getRequestDispatcher(request.getContextPath()+"/BeforePage/GUIMEI/homepage.jsp").forward(request,response);
+            }else {
+                // 登陆失败
+                request.getRequestDispatcher(request.getContextPath()+"/BeforePage/Customer/CusLogin.jsp?msg=1").forward(request,response);
+
+            }
+        }
+
+
+
         if ("select".equals(action)){
             int pageCurrentNo = Integer.parseInt(request.getParameter("pageCurrentNo"));
             int pagesize =  Integer.parseInt(request.getParameter("pagesize"));
