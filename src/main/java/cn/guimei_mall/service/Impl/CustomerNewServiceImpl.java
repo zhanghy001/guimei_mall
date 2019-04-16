@@ -14,7 +14,7 @@ public class CustomerNewServiceImpl implements CustomerNewService {
     }
 
     @Override
-    public List<CustomerNew> getCustomerNew(String cid,String name,String sex,int pageCurrentNo, int pagesize) {
+    public List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize) {
         return customerNewDao.getCustomerNew(cid,name,sex,pageCurrentNo,pagesize);
     }
 
@@ -41,5 +41,10 @@ public class CustomerNewServiceImpl implements CustomerNewService {
     @Override
     public int getTotalCount() {
         return customerNewDao.getTotalCount();
+    }
+
+    @Override
+    public int getTotalCount(int custId, String custName, String custSex) {
+        return customerNewDao.getTotalCount(custId,custName,custSex);
     }
 }

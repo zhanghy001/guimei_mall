@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>贵美登录</title>
-
+    <script src="static/js/jquery-2.1.1.min.js"></script>
     <%--css样式--%>
     <style>
         body{
@@ -69,10 +69,8 @@
             top: -70px;
         }
     </style>
-    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
     <%--登录操作--%>
-    <script type="text/javascript">
-
+    <script>
         $(function () {
             var nameSta=false;
             var pwdSta=false;
@@ -92,25 +90,32 @@
                     $(".lab2").html("");
                 }
                 if(nameSta && pwdSta){
-                   var userLoginName=$(".core1").val();
-                   var userPassword=$(".core2").val();
+                    var userLoginName=$(".core1").val();
+                    var userPassword=$(".core2").val();
                     if($(".core3 [type=radio]:checked").val()=="商家"){
                         $.getJSON("/doSel",{"action":"sellerLogin","userLoginName":userLoginName,"userPassword":userPassword},callback);
-                        function callback(data) {
-                            if(data.sellerName==null || data.sellerName==""){
-                                alert("用户名或密码不正确");
-                            }else {
-                                location.href="/Seller/index.jsp";
-                            }
-                        }
+                       function callback(data) {
+                           if(data.sellerName==null || data.sellerName==""){
+                               alert("用户名或密码不正确");
+                           }else {
+                               location.href="/Seller/index.jsp";
+                           }
+                       }
                     }
                     if($(".core3 [type=radio]:checked").val()=="管理员"){
-                        $(".move").prop("action","doUser?action=userLogin&userLoginName="+userLoginName+"&userPassword="+userPassword);
+                        $(".move").prop("action","doUser?action=userLogin")
                     }
                 }
             })
+            //     $(".core4").click(function () {
+            //         for(var i=0 ;i<$(".core3 [type=radio]").length;i++){
+            //             if($(".core3 [type=radio]")[i].checked==true){
+            //                 alert($(".core3 [type=radio]")[i])
+            //             }
+            //         }
+            //         alert($(".core3 [type=radio]:checked").val())
+            //     })
         })
-
     </script>
 </head>
 <body>
@@ -120,7 +125,7 @@
         <div style="color: red">${login}</div>
         <div><img src="img/login2.PNG" alt="" ></div>
         <div>
-            <input type="text" id="userLoginName" placeholder="请输入用户名" class="core1" >
+            <input type="text" id="userLoginName" placeholder="请输入用户名" class="core1">
             <input type="password" id="userPassword" placeholder="请输入密码" class="core2">
             <div class="core3">
                 <input type="radio" name="chageLogin" value="管理员">管理员
@@ -134,4 +139,19 @@
                 <label id="err1"></label>
 </div>
 </body>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" >
+  /*$(function () {
+      var LoginName=$("#userLoginName").val();
+      var LoginPwd=$("#userPassword").val();
+      $.getJSON("/doSel",{"action":"login","LoginName":LoginName,"LoginPwd":LoginPwd},callback)
+      function callback(data) {
+          if(data.flag=="true"){
+
+          }else {
+              alert("");
+          }
+      }
+  })*/
+</script>
 </html>

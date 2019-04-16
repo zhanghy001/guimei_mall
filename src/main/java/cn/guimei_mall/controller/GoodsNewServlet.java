@@ -62,6 +62,11 @@ public class GoodsNewServlet extends HttpServlet {
             GoodsNew goodsNew = goodsNewService.getIdGoods(Integer.parseInt(id));
             String pageSupportJson= JSON.toJSONStringWithDateFormat(goodsNew,"yyyy-MM-dd");
             out.write(pageSupportJson);
+        }else if ("goodsLookByIg".equals(action)) {
+            String id = request.getParameter("id"); // 获取 ID
+            GoodsNew goodsNew = goodsNewService.getIdGoods(Integer.parseInt(id));
+            request.setAttribute("All",goodsNew);
+            request.getRequestDispatcher(request.getContextPath()+"/BeforePage/GUIMEI/info.jsp").forward(request,response);
         } else if ("update".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             String goodsName = request.getParameter("goodsName");

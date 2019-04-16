@@ -104,17 +104,19 @@
             </div>
             </div>
             <div id="b2d1" >
-                <iframe style="width: 100%; height: 100%;border: 0px"   src="doGoods?action=goodsCusQuery&pageNumber=1"  ></iframe>
+                <%--doGoods?action=goodsCusQuery&pageNumber=1--%>
+                <iframe style="width: 100%; height: 100%;border: 0px"   src="BeforePage/GUIMEI/goodsQuery.jsp"  ></iframe>
             </div>
         </div>
 
         <div id="body_3">
          	<div	id="announ" style="width:210px;margin-top:44px;margin:50px 0 65px 10px;">
-                <%--src="doAn?action=anQueryNew"--%>
+                <%--src="doAn?action=anQueryNew" 公告--%>
                 <iframe style="width: 100%; height: 100%;border: 0px"   src="BeforePage/GUIMEI/anQuery.jsp"  ></iframe>
             </div>
             <div class="b3dx" >
-                <iframe style="width: 100%; height: 100%;border: 0px"   src="doGoods?action=goodsQueryNew"  ></iframe>
+                <%--新品上市--%>
+                <iframe style="width: 100%; height: 100%;border: 0px"   src="BeforePage/GUIMEI/goodsQueryNew.jsp"  ></iframe>
             </div>
             <div style="width: 234px;height: 47px;position: relative;top: -100px" onclick=congzi()  >
                 <img id="ad_img" style="margin-top: 6px;visibility:visible"  src="../../images/img/images/phono.jpg" >

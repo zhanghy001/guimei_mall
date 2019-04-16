@@ -142,6 +142,10 @@
             $("#pageNo").html(data.pageCurrentNo);
             $("#totalPages").html(data.totalPages);
             for (var i = 0; i<data.list.length ; i++) {
+                var goodsType = "新品";
+                if (data.list[i].goodsType==1){
+                    goodsType = "二手";
+                }
                 $("table").append("<tr>" +
                     "<td>"+data.list[i].id+"</td>" +
                     "<td>"+data.list[i].goodsName+"</td>" +
@@ -150,7 +154,7 @@
                     "<td>"+data.list[i].goodsNumber+"</td>" +
                         "<td><img src='GoodsImage/"+data.list[i].goodsImage+"'> </td>"+
                     "<td>"+data.list[i].goodsCarriage+"</td>"+
-                    "<td>${data.list[i].goodsType==0?'新品':'二手'}</td>" +
+                    "<td>"+goodsType+"</td>" +
                     "<td>"+data.list[i].goodsSeName+"</td>" +
                     "<td>"+data.list[i].goodsDiscRate+"</td>" +
                     " <th ><a class=\"layui-btn\" href=\"javascript:void(0)\" onclick='update("+data.list[i].id+")'>修改</a>" +

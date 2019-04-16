@@ -18,6 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *  订单
+ *  石婉钰
+ */
 @WebServlet(name = "doOrd", urlPatterns = "/doOrd")
 public class doOrd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
