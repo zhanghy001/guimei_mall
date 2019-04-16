@@ -1,12 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>贵美商城后台管理系统</title>
-    <base href="<%=request.getContextPath()%>/" />
+    <base href="<%=request.getContextPath() %>/" />
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@include file="layUI.jsp"%>
     <link rel="stylesheet" href="static/css/index.css">
@@ -61,15 +60,15 @@
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe621;&nbsp;&nbsp;公告管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="/page/announcement/anQuery.jsp">查询公告</a></dd>
+                        <dd><a target="iframe_context" href="page/announcement/anQuery.jsp">查询公告</a></dd>
                         <dd><a target="iframe_context" href="page/announcement/anAdd.jsp">添加公告</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a class="layui-icon" href="javascript:;" style="color:#9FC105">&#xe770;&nbsp;&nbsp;商家管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a target="iframe_context" href="doSel?action=selQuery&pageNumber=1">查询商家</a></dd>
-                        <dd><a target="iframe_context" href="page/seller/sellerAdd.jsp">添加商家</a></dd>
+                        <dd><a target="iframe_context" href="/page/seller/sellerQuery.jsp">查询商家</a></dd>
+                        <dd><a target="iframe_context" href="/page/seller/sellerAdd.jsp">添加商家</a></dd>
                     </dl>
                 </li>
 

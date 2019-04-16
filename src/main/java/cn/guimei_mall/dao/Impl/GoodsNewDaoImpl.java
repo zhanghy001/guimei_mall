@@ -29,11 +29,11 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
             //返回结果
 
             StringBuffer sql = new StringBuffer("SELECT g.`id`,g.`goodsName`,g.`goodsSmalId`,sma.`smallName`,g.`goodsMoney`,g.`goodsNumber`,g.`goodsImage`,g.`goodsCarriage`,g.`goodsType`,g.`goodsSeId`,se.`sellerName`,g.`goodsDiscId`,dis.`discRate`\n" +
-                    "\tFROM `goods` g\n" +
-                    "\tINNER JOIN `smallclass` sma ON g.`goodsSmalId` = sma.`id`\n" +
-                    "\tINNER JOIN `seller` se ON g.`goodsSeId` = se.`id` \n" +
-                    "\tINNER JOIN `discount` dis ON g.`goodsDiscId` = dis.`id` \n" +
-                    "\tWHERE  1=1 ");
+                    "FROM `goods` g " +
+                    "INNER JOIN `smallclass` sma ON g.`goodsSmalId` = sma.`id`" +
+                    "INNER JOIN `seller` se ON g.`goodsSeId` = se.`id` " +
+                    "INNER JOIN `discount` dis ON g.`goodsDiscId` = dis.`id` " +
+                    "WHERE  1=1 ");
             if (goodName != "" && goodName != null){
                 sql.append(" AND goodsName = "+goodName);
             }

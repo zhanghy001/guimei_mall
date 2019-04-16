@@ -69,22 +69,69 @@
             top: -70px;
         }
     </style>
-
+    <%--登录操作--%>
+    <script>
+        $(function () {
+            var nameSta=false;
+            var pwdSta=false;
+            $(".core4").click(function () {
+                if($(".core1").val().trim()==""){
+                    $(".lab1").html("账号不完整");
+                    nameSta=false;
+                }else {
+                    nameSta=true;
+                    $(".lab1").html("");
+                }
+                if($(".core2").val().trim()==""){
+                    $(".lab2").html("密码不完整");
+                    pwdSta=false;
+                }else {
+                    pwdSta=true;
+                    $(".lab2").html("");
+                }
+                if(nameSta && pwdSta){
+                    var userLoginName=$(".core1").val();
+                    var userPassword=$(".core2").val();
+                    if($(".core3 [type=radio]:checked").val()=="商家"){
+                        $.getJSON("/doSel",{"action":"sellerLogin","userLoginName":userLoginName,"userPassword":userPassword},callback);
+                       function callback(data) {
+                           if(data.sellerName==null || data.sellerName==""){
+                               alert("用户名或密码不正确");
+                           }else {
+                               location.href="/Seller/index.jsp";
+                           }
+                       }
+                    }
+                    if($(".core3 [type=radio]:checked").val()=="管理员"){
+                        $(".move").prop("action","doUser?action=userLogin")
+                    }
+                }
+            })
+            //     $(".core4").click(function () {
+            //         for(var i=0 ;i<$(".core3 [type=radio]").length;i++){
+            //             if($(".core3 [type=radio]")[i].checked==true){
+            //                 alert($(".core3 [type=radio]")[i])
+            //             }
+            //         }
+            //         alert($(".core3 [type=radio]:checked").val())
+            //     })
+        })
+    </script>
 </head>
 <body>
 <div class="main">
-    <form class="move" method="post" >
+    <form class="move" method="post" action="javascript:void(0)">
         <%--<div><a href="Cuslogin.jsp">顾客</a></div>--%>
         <div style="color: red">${login}</div>
         <div><img src="img/login2.PNG" alt="" ></div>
         <div>
-            <input type="text" name="userLoginName" placeholder="请输入用户名" class="core1">
-            <input type="password" name="userPassword" placeholder="请输入密码" class="core2">
+            <input type="text" id="userLoginName" placeholder="请输入用户名" class="core1">
+            <input type="password" id="userPassword" placeholder="请输入密码" class="core2">
             <div class="core3">
                 <input type="radio" name="chageLogin" value="管理员">管理员
                 <input type="radio" name="chageLogin" value="商家" checked="checked">商家
             </div>
-            <input type="image" src="img/login-botton.PNG" class="core4" />
+            <input type="image" src="img/login-botton.PNG" class="core4" id="img"/>
         </div>
 
     </form>     <label class="lab1"></label>
@@ -92,49 +139,19 @@
                 <label id="err1"></label>
 </div>
 </body>
-<%--登录操作--%>
-<script type="text/javascript">
-    $(function () {
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" >
+  /*$(function () {
+      var LoginName=$("#userLoginName").val();
+      var LoginPwd=$("#userPassword").val();
+      $.getJSON("/doSel",{"action":"login","LoginName":LoginName,"LoginPwd":LoginPwd},callback)
+      function callback(data) {
+          if(data.flag=="true"){
 
-        var msg="${param.msg}";
-        if(msg.length>0){
-            if(msg=="1"){
-                $("#err1").html("登录失败").css("color","red");
-            }
-        }
-
-
-        var nameSta=false;
-        var pwdSta=false;
-        $(".core4").click(function () {
-            if($(".core1").val().trim()==""){
-                // $(".lab1").html("账号不完整");
-                alert("账号不完整");
-                nameSta=false;
-            }else {
-                nameSta=true;
-                $(".lab1").html("");
-            }
-            if($(".core2").val().trim()==""){
-                // $(".lab2").html("密码不完整");
-                alert("密码不完整");
-                pwdSta=false;
-            }else {
-                pwdSta=true;
-                $(".lab2").html("");
-            }
-            if(nameSta && pwdSta){
-                if($(".core3 [type=radio]:checked").val()=="商家"){
-                    $(".move").prop("action","doSel?action=cusLogin")
-                }
-                if($(".core3 [type=radio]:checked").val()=="管理员"){
-                    $(".move").prop("action","doUser?action=userLogin")
-                }
-            }
-        })
-
-    })
-
-
+          }else {
+              alert("");
+          }
+      }
+  })*/
 </script>
 </html>

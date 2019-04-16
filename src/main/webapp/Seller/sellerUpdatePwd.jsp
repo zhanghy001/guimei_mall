@@ -37,11 +37,27 @@
 <body>
     <form action="doSel?action=sellerUpdatePwd" method="post">
         <div id="d1"></div>
-        ID<input type="text" value="${Sel.id}" name="id" readonly>
-        姓名<input type="text" value="${Sel.sellerName}" name="sellerName" id="sellerName" readonly>
-        登录账号<input type="text" value="${Sel.sellerUser}" name="sellerUser" readonly>
-        密码<input type="text" value="${Sel.sellerPassword}" name="sellerPassword">
+        ID<input type="text"  value="${seller.sellerId}" name="id" id="id"readonly>
+        姓名<input type="text" value="${seller.sellerName}" name="sellerName" id="sellerName" readonly>
+        登录账号<input type="text" value="${seller.sellerUser}" name="sellerUser" id ="sellerUser" readonly>
+        密码<input type="text" value="${seller.sellerPassword}" name="sellerPassword" id="sellerPassword">
         <input type="submit" value="修改完成" class="layui-btn" id="sub">
     </form>
 </body>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $("#sub").click(function () {
+        var id=$("#id").val();
+        var sellerPassword=$("#sellerPassword").val();
+        $.getJSON("/doSel",{"action":"sellerUpdatePwd","id":id,
+            "sellerPassword":sellerPassword},callback)
+        function callback(data) {
+            if(data.flag=="true"){
+                alert("修改成功");
+            }else {
+                alert("修改失败")
+            }
+        }
+    })
+</script>
 </html>

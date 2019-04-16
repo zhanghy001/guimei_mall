@@ -1,18 +1,25 @@
 package cn.guimei_mall.service.Impl;
 
-import cn.guimei_mall.dao.Impl.SellerDaoimpl;
+import cn.guimei_mall.dao.Impl.SellerDaoImpl;
 import cn.guimei_mall.dao.SellerDao;
-
 import cn.guimei_mall.entity.Seller;
 import cn.guimei_mall.service.SellerService;
 
 import java.util.List;
 
-public class SellerServiceimpl implements SellerService {
+public class SellerServicecImpl implements SellerService {
     private SellerDao sellerDao;
-    public SellerServiceimpl(){
-        sellerDao=new SellerDaoimpl();
+    public SellerServicecImpl(){sellerDao = new SellerDaoImpl();}
+    @Override
+    public Seller SellerLogin(String name, String pwd) {
+        return sellerDao.SellerLogin(name,pwd);
     }
+
+    @Override
+    public int updatePwd(Seller seller) {
+        return sellerDao.updatePwd(seller);
+    }
+
     @Override
     public List<Seller> getList() {
         return sellerDao.getList();
@@ -45,9 +52,8 @@ public class SellerServiceimpl implements SellerService {
     }
 
     @Override
-    public int getTotalCount(int sid, String selleruser) {
-        return sellerDao.getTotalCount(sid,selleruser);
+    public int getTotalCount(int sId, String selleruser) {
+        return sellerDao.getTotalCount(sId,selleruser);
     }
-
 
 }

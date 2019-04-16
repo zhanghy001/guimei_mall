@@ -1,14 +1,12 @@
 package cn.guimei_mall.service;
 
 import cn.guimei_mall.entity.BigClass;
+import cn.guimei_mall.entity.Seller;
 import cn.guimei_mall.entity.SmallClass;
 import cn.guimei_mall.entity.SuperUser;
 
 import java.util.List;
 
-/**
- * 管理员 service creatBy祝杰汉 2019-04-10
- */
 public interface SuperUserService {
     //管理员登录
     SuperUser login(String name, String pwd);
@@ -28,11 +26,10 @@ public interface SuperUserService {
     //查询所有分类条数
     int bigCount();
 
-
     //根据id查询大分类
     BigClass getBigClassById(int id);
 
-    //根据id修改大分类
+    //根据id修改分类
     boolean updateBigById(int id,String bigName,String bigText);
 
     //添加大分类
@@ -53,11 +50,11 @@ public interface SuperUserService {
     //删除小分类
     boolean deleteSmall(int id);
 
+
     //根据id查询小分类
     SmallClass getSmallClassById(int id);
 
     //根据id修改小分类
     boolean updateSmallById(int id,String smallName,int smallBigId,String smallText);
-
 
 }

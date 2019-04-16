@@ -31,7 +31,7 @@ public class doSmallClassServlet extends HttpServlet {
             int pageCurrentNo= Integer.parseInt(request.getParameter("pageCurrentNo"));
             int pagesize= Integer.parseInt(request.getParameter("pagesize"));
             List<SmallClass> smallClassList=sus.getSmllListBy(smallName,smallBigId,pageCurrentNo,pagesize);
-     //       smallClassList.get(1).toString();
+            //       smallClassList.get(1).toString();
             PageSupport pageSupport=new PageSupport();
             pageSupport.setList(smallClassList);
             pageSupport.setPageCurrentNo(pageCurrentNo);
@@ -110,6 +110,6 @@ public class doSmallClassServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doPost(request,response);
+        doPost(request,response);
     }
 }
