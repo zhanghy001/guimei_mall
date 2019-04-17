@@ -319,4 +319,28 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         }
         return count;
     }
+
+
+    @Override
+    public int shoppingCarCount(int custId) {
+        int count = 0;
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM `shoppingcar` WHERE scCusId=?s");
+            Object[] p = {custId};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return count;
+    }
 }

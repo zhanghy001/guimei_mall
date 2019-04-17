@@ -6,19 +6,19 @@ package cn.guimei_mall.entity;
  */
 public class GoodsNew {
     // id
-    int id;
+    int id;  //***
     String goodsName;
     int goodsSmalId;
     String goodsSmallName; // 类别名
-    double goodsMoney;
+    double goodsMoney;   //***
     int goodsNumber;
-    String goodsImage;
+    String goodsImage; //***
     double goodsCarriage;
     int goodsType;
     int goodsSeId;
     String goodsSeName; // 类别名
     int goodsDiscId;
-    double goodsDiscRate; // 折扣价格
+    double goodsDiscRate; // 折扣价格 //***
 
     public int getId() {
         return id;
