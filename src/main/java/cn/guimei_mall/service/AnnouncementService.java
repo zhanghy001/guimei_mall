@@ -27,7 +27,12 @@ public interface AnnouncementService {
     /**
      * 添加、级联查询
      */
+
     int addAnn(Announcement ann);
+    /**
+     * 总条数
+     */
+    int getCount();
     /**
      * 分页
      */

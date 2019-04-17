@@ -10,7 +10,7 @@
 </head>
 
 
-            <div style="float: left; width: 80px;height: 80px;margin: 26px 0px 18px 25px;" id="goodsimg">
+            <div id="goodsimg">
                 <%--<a  href="doGoods?action=goodsLookByIg&id=${all.goods.id}" target="_parent">--%>
                         <%--<img src="GoodsImage/${all.goods.goodsImage}" style="width: 80px;height: 80px" ></a>--%>
 
@@ -35,9 +35,9 @@
             // $("#pageNo").html(data.pageCurrentNo);
             // $("#totalPages").html(data.totalPages);
             for (var i = 0; i<data.list.length ; i++) {
-                $("#goodsimg").append("<a href='#' target='_parent'>" +
+                $("#goodsimg").append("<div style='float: left; width: 80px;height: 80px;margin: 26px 0px 18px 25px;' ><a href='/GoodsNewServlet?action=goodsLookByIg&id="+data.list[i].id+"' target='_parent'>" +
                     "<img src='GoodsImage/"+data.list[i].goodsImage+"' style='width: 80px;height: 80px'>" +
-                    "<br>"+data.list[i].goodsName+"</a>");
+                    "<br>"+data.list[i].goodsName+"</a></div>");
 
             }
         }

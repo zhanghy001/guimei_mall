@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.TimerTask;
 
 /**
@@ -48,7 +49,10 @@ public class NoticeServlet extends HttpServlet {
             out.write(pageSupportJson);
         }else if ("selectid".equals(action)){
             String id = request.getParameter("id"); // 获取 ID
-            Announcement announcement = announ.getIdAnnounce(Integer.parseInt(id));
+            int counta = announ.getCount();
+            Random a = new Random();
+            int countt =a.nextInt(counta)+1;//若要生成1-100的随机数则改为a.nextInt(100)+1即可
+            Announcement announcement = announ.getIdAnnounce(countt);
 
             String pageSupportJson= JSON.toJSONStringWithDateFormat(announcement,"yyyy-MM-dd");
             out.write(pageSupportJson);

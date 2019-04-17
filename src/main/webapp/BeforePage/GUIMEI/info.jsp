@@ -121,7 +121,7 @@
         <hr>
         <p>运费：<label id="g_carriage"></label>${All.goodsCarriage}元</p>
         <hr>
-        <a href="doShop?action=shopAdd&pageNumber=1&id=${All.id}"><img id="infoimg1" src="images/img/images/buynow.gif"></a>
+        <a href="doShop?action=shopAdd&&goodsId=${All.id}"><img id="infoimg1" src="images/img/images/buynow.gif"></a>
         <dl>
             <dt><img src="../../images/img/images/onlinepay.gif"></dt>
             <dd>此商品支持网银支付，网上汇款免手续费。收货满意后出售者才能拿钱，货款都安全！</dd>

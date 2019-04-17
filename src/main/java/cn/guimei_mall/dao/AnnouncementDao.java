@@ -25,6 +25,10 @@ public interface AnnouncementDao {
      */
     int delectAnn(int id);
     /**
+     * 总条数
+     */
+    int getCount();
+    /**
      * 添加、级联查询
      */
     int addAnn(Announcement ann);

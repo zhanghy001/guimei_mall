@@ -9,7 +9,8 @@
 <body>
 
 
-            <div id="goodsimg" style="float: left;font-size: 10px;width: 80px;height: 80px;margin: 8px 0px 18px 40px;">
+            <div id="goodsimg" >
+            <%--<div id="goodsimg" style="float: left;font-size: 10px;width: 80px;height: 80px;margin: 8px 0px 18px 40px;">--%>
 
             </div>
 
@@ -79,14 +80,14 @@
                     var sellerName = -1;
                     var smallName = -1;
 
-                    $.getJSON("/GoodsNewServlet",{"action":"select","pageCurrentNo":pageCurrentNo,"pagesize":10,"goodName":goodName,"sellerName":sellerName,"smallName":smallName},callback);
+                    $.getJSON("/GoodsNewServlet",{"action":"select","pageCurrentNo":pageCurrentNo,"pagesize":12,"goodName":goodName,"sellerName":sellerName,"smallName":smallName},callback);
                     function callback(data) {
                         $("#pageNo").html(data.pageCurrentNo);
                         $("#totalPages").html(data.totalPages);
                         for (var i = 0; i<data.list.length ; i++) {
-                            $("#goodsimg").append("<a href='#' target='_parent'>" +
+                            $("#goodsimg").append("<div style='float: left;font-size: 10px;width: 80px;height: 80px;margin: 8px 0px 18px 40px;'><a href='/GoodsNewServlet?action=goodsLookByIg&id="+data.list[i].id+"' target='_parent'>" +
                                 "<img src='GoodsImage/"+data.list[i].goodsImage+"' style='width: 80px;height: 80px'>" +
-                                "<br>"+data.list[i].goodsName+"</a>");
+                                "<br>"+data.list[i].goodsName+"</a></div>");
 
                         }
 

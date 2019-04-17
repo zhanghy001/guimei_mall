@@ -35,7 +35,7 @@ public class GoodsNewDaoImpl extends BaseDao implements GoodsNewDao {
                     "INNER JOIN `discount` dis ON g.`goodsDiscId` = dis.`id` " +
                     "WHERE  1=1 ");
             if (goodName != "" && goodName != null){
-                sql.append(" AND goodsName = "+goodName);
+                sql.append(" AND goodsName ='"+goodName+"' ");
             }
             if (goodSeId != -1){
                 sql.append(" AND goodsSeId = "+goodSeId);
