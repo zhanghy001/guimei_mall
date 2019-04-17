@@ -52,4 +52,9 @@ public class CustomerNewServiceImpl implements CustomerNewService {
     public int getTotalCount(int custId, String custName, String custSex) {
         return customerNewDao.getTotalCount(custId,custName,custSex);
     }
+
+    @Override
+    public int shoppingCarCount(int custId) {
+        return customerNewDao.shoppingCarCount(custId);
+    }
 }

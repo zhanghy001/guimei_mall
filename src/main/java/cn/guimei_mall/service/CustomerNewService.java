@@ -41,4 +41,8 @@ public interface CustomerNewService {
      * 查询总条数
      */
     int getTotalCount(int custId,String custName,String custSex);
+    /**
+     * 查询购物车总条数
+     */
+    int shoppingCarCount(int custId);
 }
