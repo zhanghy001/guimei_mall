@@ -11,6 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
+    /**
+     * 登陆验证
+     * @param cusLoName
+     * @param passWord
+     * @return
+     */
     @Override
     public CustomerNew cusLogin(String cusLoName, String passWord) {
         CustomerNew cn = new CustomerNew();
@@ -49,6 +55,15 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return cn;
     }
 
+    /**
+     * 查询全部
+     * @param cid
+     * @param name
+     * @param sex
+     * @param pageCurrentNo
+     * @param pagesize
+     * @return
+     */
     @Override
     public List<CustomerNew> getCustomerNew(int cid,String name,String sex,int pageCurrentNo, int pagesize) {
         List<CustomerNew> announcementList = new ArrayList<>();
@@ -62,11 +77,12 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
                 sql.append(" AND id = "+cid);
             }
             if (name.trim().length() != 0){
-                sql.append(" AND cusName = "+name);
+                sql.append(" AND cusName = '"+name+"'");
+                pageCurrentNo = 1;
             }
 
             if (sex.trim().length() != 0){
-                sql.append(" AND cusSex = "+sex);
+                sql.append(" AND cusSex = '"+sex+"'");
             }
             sql.append(" limit ?,?");
             Object[] p = {(pageCurrentNo-1)*pagesize,pagesize};
@@ -105,6 +121,11 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return announcementList;
     }
 
+    /**
+     * 根据id查询
+     * @param cid
+     * @return
+     */
     @Override
     public CustomerNew getIdCustomerNew(int cid) {
         CustomerNew cn = new CustomerNew();
@@ -146,6 +167,12 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return cn;
     }
 
+    /**
+     * 修改
+     * @param cn
+     * @param cid
+     * @return
+     */
     @Override
     public int updateNews(CustomerNew cn, int cid) {
         int ire = 0;
@@ -169,6 +196,11 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return ire;
     }
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     @Override
     public int delectCustomerNew(int id) {
         int ire = 0;
@@ -191,6 +223,11 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return ire;
     }
 
+    /**
+     * 添加
+     * @param cn
+     * @return
+     */
     @Override
     public int addAnn(CustomerNew cn) {
         int ire = 0;
@@ -214,6 +251,10 @@ public class CustomerNewDaoImpl extends BaseDao implements CustomerNewDao {
         return ire;
     }
 
+    /**
+     * 获得页数
+     * @return
+     */
     @Override
     public int getTotalCount() {
         int totalCount = 0;

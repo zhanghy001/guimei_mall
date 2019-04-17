@@ -131,6 +131,29 @@ public class AnnouncementDaoImpl extends BaseDao implements AnnouncementDao {
     }
 
     @Override
+    public int getCount() {
+        int count = 0;
+        try {
+            // 获取连接
+            this.getConn();
+            //返回结果
+
+            StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM announcement");
+            Object[] p = {};
+            ResultSet rs = this.excuteSelect(sql.toString(),p);
+
+            while (rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConn();
+        }
+        return count;
+    }
+
+    @Override
     public int addAnn(Announcement ann) {
         int ire = 0;
         try {

@@ -59,10 +59,10 @@
 				<c:forEach items="${Page.pageData}" var="all" varStatus="i">
 			<tr >
 
-				<td style="width:36%;text-align:left;">${all.goods.goodsName}</td>
-				<td style="width:20%;"><a  href="doGoods?action=goodsLookByIg&id=${all.goods.id}" >
-					<img src="GoodsImage/${all.goods.goodsImage}" style="width: 80px;height: 80px" ></a></td>
-				<td style="width:8%;">${all.goods.goodsMoney}</td>
+				<td style="width:36%;text-align:left;">${all.goodsName}</td>
+				<td style="width:20%;"><a  href="doGoods?action=goodsLookByIg&id=${all.id}" >
+					<img src="GoodsImage/${all.goodsImage}" style="width: 80px;height: 80px" ></a></td>
+				<td style="width:8%;">${all.goodsMoney}</td>
 				<td style="width:8%;">${all.cheapPrice}</td>
 				<td style="width:8%;">${all.discount.discRate}</td>
 				<td style="width:8%;" ><input class="number" type="number" value="${all.shoppingcar.scNumber}" onchange="shop(${all.shoppingcar.id},this.value,${i.count})"></td>
@@ -93,7 +93,7 @@
           <p id="dizhi_2jibiaoti" >补充您的邮件地址和联系人信息</p>
           <br/>
 		<form action="../../doOrd?action=ordAdd" method="post">
-            姓名：<input type="text" name="cusName" value="${Cus.cusName}"><br>
+            姓名：<input type="text" name="cusName" value="${customer.cusName}"><br>
             地址：<input type="text" name="orderseAddress" value="湖南长沙岳麓区溁湾填"><br>
             电话：<input type="text" size="4" name="quhao" value="0731">-<input type="text" size="8" name="phone" value="88858332">-<input type="text" size="4" name="fenji" value="8888">
             （区号-电话号码-分机）<br>

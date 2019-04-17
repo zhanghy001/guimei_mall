@@ -10,7 +10,7 @@ import java.util.List;
  * 公告
  * Hao
  */
-public class AnnouncementServiceImpl implements AnnouncementService{
+public class AnnouncementServiceImpl implements AnnouncementService {
     AnnouncementDao announce =null;
     public AnnouncementServiceImpl() {
         announce = new AnnouncementDaoImpl();
@@ -39,6 +39,11 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     @Override
     public int addAnn(Announcement ann) {
         return announce.addAnn(ann);
+    }
+
+    @Override
+    public int getCount() {
+        return announce.getCount();
     }
 
     @Override
